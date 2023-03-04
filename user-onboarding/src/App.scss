@@ -1,0 +1,73 @@
+.App {
+  border-radius: 8px;
+  max-width: 144rem;
+  height: 90rem;
+  background-color: white;
+  display: flex;
+  box-shadow: 0px 0px 56px rgba(0, 133, 255, 0.05);
+}
+.left-block {
+  width: 33.33%;
+  background-color: #35a0ee;
+  border-radius: 8px 0 0 8px;
+  color: white;
+  padding: 2rem 3rem;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.logo__dark {
+  color: #dce8ff;
+}
+.progress {
+}
+.quote {
+  background-color: white;
+  padding: 2rem 2rem;
+  color: #ccc;
+  height: 18rem;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__text {
+    font-style: italic;
+  }
+
+  &__sign {
+    font-family: 'Times New Roman', Times, serif, 'Lucida Sans', Arial,
+      sans-serif;
+    position: absolute;
+    top: -2.5rem;
+    left: -1.5rem;
+    font-size: 5rem;
+    background-color: white;
+    color: #35a0ee;
+    padding: 0 1rem;
+    border-radius: 3px;
+    height: 4rem;
+    box-shadow: 16px 12px 56px rgba(11, 29, 46, 0.15);
+  }
+  &__author__name {
+    font-weight: bold;
+    color: black;
+  }
+  &__author__role {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  &__logo {
+    &--blue {
+      color: blue;
+    }
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
+}
+.contact-details {
+}
