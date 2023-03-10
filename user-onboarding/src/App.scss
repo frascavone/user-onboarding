@@ -1,32 +1,82 @@
 .App {
   border-radius: 8px;
-  max-width: 144rem;
-  height: 90rem;
+  max-width: 100vw;
+  max-height: 100vh;
   background-color: white;
   display: flex;
   box-shadow: 0px 0px 56px rgba(0, 133, 255, 0.05);
+  font-size: 1.5rem;
 }
 .left-block {
   width: 33.33%;
   background-color: #35a0ee;
   border-radius: 8px 0 0 8px;
-  color: white;
   padding: 2rem 3rem;
-  font-size: 1.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.logo__dark {
-  color: #dce8ff;
+.logo {
+  color: rgba(255, 255, 255, 0.5);
+  &__dark {
+    color: #dce8ff;
+  }
 }
 .progress {
+  height: 30%;
+  padding: 5rem 2rem;
+  color: #dce8ff;
+  margin: 15rem 0;
+  display: flex;
+  flex-direction: column;
+  &__item {
+    display: flex;
+    margin: 1rem 0 0 0;
+    &__square {
+      border: 2.5px solid #dce8ff;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 2px;
+      margin: 0 0.5rem;
+      padding: 0.5rem;
+      &--active {
+        border: 3px solid white;
+      }
+    }
+    &__dash {
+      border-left: 2.5px solid #dce8ff;
+      padding: 0.5rem 2.5rem;
+      margin-left: 1.6rem;
+      margin-top: 0.5rem;
+      &--active {
+        border-left: 3px solid white;
+        padding: 0.5rem 2.5rem;
+        margin-left: 1.6rem;
+        margin-top: 0.5rem;
+      }
+    }
+    &--active {
+      color: white;
+      font-weight: 800;
+    }
+    &__dot--active {
+      display: block;
+      height: 10px;
+      background-color: white;
+      border-radius: 2px;
+    }
+  }
 }
+
+.hidden {
+  display: none;
+}
+
 .quote {
   background-color: white;
   padding: 2rem 2rem;
   color: #ccc;
-  height: 18rem;
+  max-height: 18rem;
   border-radius: 4px;
   position: relative;
   display: flex;
@@ -34,6 +84,7 @@
   justify-content: space-between;
   &__text {
     font-style: italic;
+    margin-bottom: 2rem;
   }
 
   &__sign {
@@ -70,4 +121,90 @@
   }
 }
 .contact-details {
+  width: 69.99%;
+  display: flex;
+  flex-direction: column;
+  color: #a4aeb4;
+}
+.page-header {
+  width: 100%;
+  justify-content: space-between;
+  height: 10%;
+  display: flex;
+  padding: 3rem 8rem;
+}
+.help {
+  color: #35a0ee;
+  font-weight: 800;
+}
+.page-content {
+  width: 100%;
+  height: 75%;
+  padding: 3rem 20rem 3rem 8rem;
+}
+footer {
+  width: 100%;
+  height: 15%;
+  padding: 3rem 8rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+a {
+  text-decoration: none;
+  color: #35a0ee;
+  font-weight: 600;
+}
+button {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+}
+.skip {
+  color: #35a0ee;
+}
+.next {
+  background-color: #35a0ee;
+  color: white;
+}
+.title-description {
+  margin: 2rem 0;
+}
+h1,
+h2 {
+  color: black;
+  margin-bottom: 1.5rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  align-items: end;
+}
+label {
+  font-size: 1rem;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+.form-control input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 0 1rem;
+}
+
+select {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  margin: 1rem 0 0 0;
+}
+.phone {
+  flex-direction: row;
 }
