@@ -1,0 +1,36 @@
+.investment-plans {
+  width: 69.99%;
+  color: #ccc;
+  & button {
+    padding: 1rem 5rem 1rem 1rem;
+  }
+}
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 3rem 20rem 3rem 8rem;
+}
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+h4 {
+  color: black;
+}
+p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.slider {
+  width: 100%;
+  margin: 2rem 0 3rem 0;
+}
+input {
+  margin-right: 1rem;
+}
+.investor label {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
