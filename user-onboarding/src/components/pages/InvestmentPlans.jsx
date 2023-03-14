@@ -5,9 +5,9 @@ import './InvestmentPlans.scss';
 export const InvestmentPlans = (props) => {
   return (
     <React.Fragment>
-      <section className="investment-plans">
+      <section className="page-content">
         <PageHeader step={props.step} />
-        <div className="page-content">
+        <div className="investment-plans">
           <div className="title-description">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
@@ -15,25 +15,33 @@ export const InvestmentPlans = (props) => {
           <h4>Ho much are you planning to invest in this year?</h4>
           <div className="row">
             <div className="form-control">
-              <label htmlFor="from">From</label>
-              <input type="text" id="from" />
+              <label htmlFor="from">
+                From
+                <input type="text" id="from" defaultValue={'$'} />
+              </label>
             </div>
             <div className="form-control">
-              <label htmlFor="to">To</label>
-              <input type="text" id="to" />
+              <label htmlFor="to">
+                To
+                <input type="text" id="to" defaultValue={'$'} />
+              </label>
             </div>
           </div>
-          <input type="range" min="1" max="100" class="slider" id="myRange" />
+          <input id="investmentRange" type="range" name="range" list="plans" />
+          <datalist id="plans">
+            <option label="$10,000"></option>
+            <option label="$50,000"></option>
+            <option label="$100,000"></option>
+            <option label="$200,000"></option>
+            <option label="$500,000"></option>
+            <option label="$1,000,000+"></option>
+          </datalist>
           <h3>Are you an accredited investor?</h3>
-          <div class="investor">
-            <button>
-              <input type="radio" name="isIvestor" id="isInvestor" />
-              <label htmlFor="isInvestor">Yes</label>
-            </button>
-            <button>
-              <input type="radio" name="isIvestor" id="isNotInvestor" />
-              <label htmlFor="isNotInvestor">No</label>
-            </button>
+          <div className="investor">
+            <input type="radio" name="isIvestor" id="isInvestor" />
+            <label htmlFor="isInvestor">Yes</label>
+            <input type="radio" name="isIvestor" id="isNotInvestor" />
+            <label htmlFor="isNotInvestor">No</label>
           </div>
         </div>
         <PageFooter step={props.step} onclick={props.onClick} />

@@ -6,9 +6,9 @@ import './ContactDetails.scss';
 export const ContactDetails = (props) => {
   return (
     <React.Fragment>
-      <section className="contact-details">
+      <section className="page-content">
         <PageHeader step={props.step} />
-        <div className="page-content">
+        <div className="contact-details">
           <div className="title-description">
             <h1>{props.title}</h1>
             <p>{props.description}</p>

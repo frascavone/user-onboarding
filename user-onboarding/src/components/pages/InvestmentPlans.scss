@@ -1,36 +1,70 @@
 .investment-plans {
-  width: 69.99%;
-  color: #ccc;
-  & button {
-    padding: 1rem 5rem 1rem 1rem;
-  }
-}
-.page-content {
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 3rem 20rem 3rem 8rem;
+  padding: 3rem 8rem;
+  color: black;
 }
 .row {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 }
-h4 {
-  color: black;
-}
+
 p {
   font-size: 1.2rem;
   color: #ccc;
 }
-.slider {
+.form-control {
+  & label:focus-within {
+    color: #35a0ee;
+  }
+  & input {
+    margin-right: 1rem;
+    display: block;
+  }
+}
+#investmentRange {
+  width: 97%;
+  margin-bottom: 1rem;
+}
+datalist {
   width: 100%;
-  margin: 2rem 0 3rem 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 4rem;
 }
-input {
-  margin-right: 1rem;
-}
-.investor label {
-  font-size: 1.5rem;
-  font-weight: 600;
+
+.investor {
+  margin-top: 2rem;
+  position: relative;
+  & label {
+    display: inline-block;
+    border-radius: 4px;
+    margin-right: 1rem;
+    border: 2px solid #ccc;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1rem 5rem 1rem 4rem;
+    color: black;
+  }
+  & #isInvestor {
+    position: absolute;
+    display: inline-block;
+    left: 1.5rem;
+    top: 1.5rem;
+  }
+  & #isNotInvestor {
+    position: absolute;
+    display: inline-block;
+    top: 1.5rem;
+    left: 14.5rem;
+  }
+  & input[type='radio']:checked + label {
+    background-color: #dce8ff;
+    color: #35a0ee;
+    border: 2px solid #35a0ee;
+  }
 }
