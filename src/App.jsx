@@ -6,11 +6,29 @@ import { useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
 
 function App() {
+  const quotes = [
+    {
+      quote: `We care about your time, that's why we created a 3-stage onboarding that will not take more than 5 minutes to complete`,
+      authorName: 'William Mac',
+      authorRole: 'co founder investor',
+    },
+    {
+      quote: `Save from thousands to millions on your deal. Secure the best possible. And get independent, unbiased advice for free`,
+      authorName: 'Jodie Sears',
+      authorRole: "unitedproperties' agent",
+    },
+    {
+      quote: `United Properties is about fast & easy searching, buying, selling and investing ever — online, with an expert by our side`,
+      authorName: 'Ollie Macmahon',
+      authorRole: 'managing director',
+    },
+  ];
+
   let [state, setState] = useState({
     step: 1,
-    quote: `We care about your time, that's why we created a 3-stage onboarding that will not take more than 5 minutes to complete`,
-    authorName: 'William Mac',
-    authorRole: 'co founder investor',
+    quote: quotes[0].quote,
+    authorName: quotes[0].authorName,
+    authorRole: quotes[0].authorRole,
   });
 
   const currentStep = state.step;
@@ -19,17 +37,23 @@ function App() {
   const authorRole = state.authorRole;
 
   const incrementStep = () => {
+    const newStep = state.step + 1;
+    console.log(state.step);
     setState({
-      step: state.step + 1,
-      authorName: 'author2',
-      authorRole: 'role2',
+      step: newStep,
+      quote: quotes[newStep - 1].quote,
+      authorName: quotes[newStep - 1].authorName,
+      authorRole: quotes[newStep - 1].authorRole,
     });
   };
   const decrementStep = () => {
+    const newStep = state.step - 1;
+    console.log(state.step);
     setState({
-      step: state.step - 1,
-      authorName: 'author2',
-      authorRole: 'role2',
+      step: newStep,
+      quote: quotes[newStep - 1].quote,
+      authorName: quotes[newStep - 1].authorName,
+      authorRole: quotes[newStep - 1].authorRole,
     });
   };
 
