@@ -33,7 +33,11 @@ export const InvestmentPreferences = (props) => {
             ))}
           </div>
         </div>
-        <PageFooter currentStep={props.currentStep} onclick={props.onClick} />
+        <PageFooter
+          currentStep={props.currentStep}
+          nextStep={props.nextStep}
+          previousStep={props.previousStep}
+        />
       </section>
     </React.Fragment>
   );

@@ -6,33 +6,31 @@ import { useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
 
 function App() {
-  let [currentStep, setCurrentStep] = useState(1);
+  let [state, setState] = useState({
+    step: 1,
+    quote: `We care about your time, that's why we created a 3-stage onboarding that will not take more than 5 minutes to complete`,
+    authorName: 'William Mac',
+    authorRole: 'co founder investor',
+  });
 
-  let [quote, setQuote] = useState(
-    `We care about your time, that's why we created a 3-stage onboarding that will not take more than 5 minutes to complete`
-  );
-  let [authorName, setAuthorName] = useState('William Mac');
-  let [authorRole, setAuthorRole] = useState('co founder investor');
-
-  // if (currentStep === 2) {
-  //   setQuote(() => 'quote2');
-  //   setAuthorName(() => 'author2');
-  //   setAuthorRole(() => 'role2');
-  // }
-  // if (currentStep === 3) {
-  //   setQuote(() => 'quote3');
-  //   setAuthorName(() => 'author3');
-  //   setAuthorRole(() => 'role3');
-  // }
+  const currentStep = state.step;
+  const quote = state.quote;
+  const authorName = state.authorName;
+  const authorRole = state.authorRole;
 
   const incrementStep = () => {
-    setCurrentStep(() => currentStep++);
-    console.log(currentStep);
-    console.log('Avanti!');
+    setState({
+      step: state.step + 1,
+      authorName: 'author2',
+      authorRole: 'role2',
+    });
   };
   const decrementStep = () => {
-    setCurrentStep(() => currentStep--);
-    console.log('Indietro!');
+    setState({
+      step: state.step - 1,
+      authorName: 'author2',
+      authorRole: 'role2',
+    });
   };
 
   return (
