@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
 
 function App() {
-  let [currentStep, setCurrentStep] = useState(2);
+  let [currentStep, setCurrentStep] = useState(1);
 
-  const [quote, setQuote] = useState(
+  let [quote, setQuote] = useState(
     `We care about your time, that's why we created a 3-stage onboarding that will not take more than 5 minutes to complete`
   );
   let [authorName, setAuthorName] = useState('William Mac');
@@ -25,9 +25,14 @@ function App() {
   //   setAuthorRole(() => 'role3');
   // }
 
-  const clickHandler = () => {
-    setCurrentStep((currentStep) => currentStep++);
-    console.log('Ho cliccato!!!');
+  const incrementStep = () => {
+    setCurrentStep(() => currentStep++);
+    console.log(currentStep);
+    console.log('Avanti!');
+  };
+  const decrementStep = () => {
+    setCurrentStep(() => currentStep--);
+    console.log('Indietro!');
   };
 
   return (
@@ -40,23 +45,29 @@ function App() {
       />
       {currentStep === 1 && (
         <ContactDetails
-          step={currentStep}
+          currentStep={currentStep}
           title="Contact Details"
           description="Welcome to United Properties, we are glad to see you! Let’s get started by letting us know a little bit about you"
-          onClick={clickHandler}
+          nextStep={incrementStep}
+          previousStep={decrementStep}
         />
       )}
       {currentStep === 2 && (
         <InvestmentPlans
-          step={currentStep}
           title="Investment plans"
           description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
+          currentStep={currentStep}
+          nextStep={incrementStep}
+          previousStep={decrementStep}
         />
       )}
       {currentStep === 3 && (
         <InvestmentPreferences
-          step={currentStep}
           title="Investment preferences"
+          description="This will help us figure out what your investment options are so that we can show you only possibly intresting for you deals"
+          currentStep={currentStep}
+          nextStep={incrementStep}
+          previousStep={decrementStep}
         />
       )}
     </div>

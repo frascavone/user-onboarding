@@ -1,13 +1,14 @@
 import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
-import './InvestmentPlans.scss';
+import styles from './InvestmentPlans.module.scss';
+
 export const InvestmentPlans = (props) => {
   return (
     <React.Fragment>
       <section className="page-content">
         <PageHeader step={props.step} />
-        <div className="investment-plans">
+        <div className={styles['investment-plans']}>
           <div className="title-description">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
@@ -37,14 +38,14 @@ export const InvestmentPlans = (props) => {
             <option label="$1,000,000+"></option>
           </datalist>
           <h3>Are you an accredited investor?</h3>
-          <div className="investor">
-            <input type="radio" name="isIvestor" id="isInvestor" />
-            <label htmlFor="isInvestor">Yes</label>
-            <input type="radio" name="isIvestor" id="isNotInvestor" />
-            <label htmlFor="isNotInvestor">No</label>
+          <div className={styles.investor}>
+            <input type="radio" name="isIvestor" id={styles['isInvestor']} />
+            <label htmlFor={styles['isInvestor']}>Yes</label>
+            <input type="radio" name="isIvestor" id={styles['isNotInvestor']} />
+            <label htmlFor={styles['isNotInvestor']}>No</label>
           </div>
         </div>
-        <PageFooter step={props.step} onclick={props.onClick} />
+        <PageFooter currentStep={props.currentStep} onclick={props.onClick} />
       </section>
     </React.Fragment>
   );

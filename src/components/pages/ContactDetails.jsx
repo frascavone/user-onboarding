@@ -1,36 +1,40 @@
 import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
-import './ContactDetails.scss';
+import styles from './ContactDetails.module.scss';
 
 export const ContactDetails = (props) => {
   return (
     <React.Fragment>
       <section className="page-content">
         <PageHeader step={props.step} />
-        <div className="contact-details">
+        <div className={styles['contact-details']}>
           <div className="title-description">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
           </div>
           <form>
-            <div className="row">
-              <div className="form-control form-control__fullname">
+            <div className={styles.row}>
+              <div
+                className={`${styles['form-control']}  ${styles['form-control__fullname']}`}
+              >
                 <label htmlFor="fullname">Full name</label>
                 <input type="text" id="fullname" />
               </div>
-              <div className="form-control form-control__phone">
+              <div
+                className={`${styles['form-control']}  ${styles['form-control__phone']}`}
+              >
                 <select name="phone" id="phone">
                   <option value="it">🇮🇹</option>
                 </select>
                 <input type="tel" id="phone" />
               </div>
             </div>
-            <div className="form-control">
+            <div className={styles['form-control']}>
               <label htmlFor="email">Email address</label>
               <input type="text" id="email" />
             </div>
-            <div className="form-control">
+            <div className={styles['form-control']}>
               <label htmlFor="country">Country</label>
               <select name="countries" id="country">
                 <option value="ukraine">Ukraine</option>
@@ -46,7 +50,11 @@ export const ContactDetails = (props) => {
             <a href="#">Expand privacy policy &rarr;</a>
           </div>
         </div>
-        <PageFooter step={props.step} onclick={props.onClick} />
+        <PageFooter
+          currentStep={props.currentStep}
+          nextStep={props.nextStep}
+          previousStep={props.previousStep}
+        />
       </section>
     </React.Fragment>
   );
