@@ -24,21 +24,15 @@ function App() {
     },
   ];
 
-  let [state, setState] = useState({
+  const [state, setState] = useState({
     step: 1,
     quote: quotes[0].quote,
     authorName: quotes[0].authorName,
     authorRole: quotes[0].authorRole,
   });
 
-  const currentStep = state.step;
-  const quote = state.quote;
-  const authorName = state.authorName;
-  const authorRole = state.authorRole;
-
   const incrementStep = () => {
     const newStep = state.step + 1;
-    console.log(state.step);
     setState({
       step: newStep,
       quote: quotes[newStep - 1].quote,
@@ -48,7 +42,6 @@ function App() {
   };
   const decrementStep = () => {
     const newStep = state.step - 1;
-    console.log(state.step);
     setState({
       step: newStep,
       quote: quotes[newStep - 1].quote,
@@ -57,13 +50,18 @@ function App() {
     });
   };
 
+  const currentStep = state.step;
+  const currentQuote = state.quote;
+  const currentAuthorName = state.authorName;
+  const currentAuthorRole = state.authorRole;
+
   return (
     <div className="App">
       <LeftBlock
         step={currentStep}
-        quote={quote}
-        authorName={authorName}
-        authorRole={authorRole}
+        quote={currentQuote}
+        authorName={currentAuthorName}
+        authorRole={currentAuthorRole}
       />
       {currentStep === 1 && (
         <ContactDetails

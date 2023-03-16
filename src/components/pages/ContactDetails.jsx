@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import styles from './ContactDetails.module.scss';
@@ -7,7 +7,7 @@ export const ContactDetails = (props) => {
   return (
     <React.Fragment>
       <section className="page-content">
-        <PageHeader step={props.step} />
+        <PageHeader step={props.currentStep} />
         <div className={styles['contact-details']}>
           <div className="title-description">
             <h1>{props.title}</h1>

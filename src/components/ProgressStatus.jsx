@@ -4,8 +4,8 @@ import { ProgressItem } from './ProgressItem';
 export const ProgressStatus = (props) => {
   const currentStep = props.step;
 
-  const [step2IsActive] = useState(currentStep > 1 ? true : false);
-  const [step3IsActive] = useState(currentStep > 2 ? true : false);
+  let step2IsActive = currentStep >= 2 ? true : false;
+  let step3IsActive = currentStep === 3 ? true : false;
 
   return (
     <React.Fragment>

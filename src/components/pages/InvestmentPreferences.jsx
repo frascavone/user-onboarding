@@ -17,7 +17,7 @@ export const InvestmentPreferences = (props) => {
   return (
     <React.Fragment>
       <section className="page-content">
-        <PageHeader step={props.step} />
+        <PageHeader step={props.currentStep} />
         <div className="investment-preferences">
           <div className="title-description">
             <h1>{props.title}</h1>
