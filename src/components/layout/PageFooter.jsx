@@ -13,7 +13,7 @@ export const PageFooter = (props) => {
         <div className="actions">
           <button className="skip">Skip for now</button>
           {props.currentStep >= 1 && props.currentStep < 3 && (
-            <button className="next" onClick={props.nextStep}>
+            <button type="button" className="next" onClick={props.nextStep}>
               Next step &rarr;
             </button>
           )}

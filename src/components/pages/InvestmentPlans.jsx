@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
+import { TitleDescription } from '../TitleDescription';
 import styles from './InvestmentPlans.module.scss';
 
 export const InvestmentPlans = (props) => {
@@ -9,10 +10,10 @@ export const InvestmentPlans = (props) => {
       <section className="page-content">
         <PageHeader step={props.currentStep} />
         <div className={styles['investment-plans']}>
-          <div className="title-description">
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-          </div>
+          <TitleDescription
+            title="Investment plans"
+            description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
+          />
           <h4>Ho much are you planning to invest in this year?</h4>
           <div className="row">
             <div className={styles['form-control']}>

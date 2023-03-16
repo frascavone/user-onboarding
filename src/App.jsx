@@ -31,6 +31,11 @@ function App() {
     authorRole: quotes[0].authorRole,
   });
 
+  const currentStep = state.step;
+  const currentQuote = state.quote;
+  const currentAuthorName = state.authorName;
+  const currentAuthorRole = state.authorRole;
+
   const incrementStep = () => {
     const newStep = state.step + 1;
     setState({
@@ -50,10 +55,10 @@ function App() {
     });
   };
 
-  const currentStep = state.step;
-  const currentQuote = state.quote;
-  const currentAuthorName = state.authorName;
-  const currentAuthorRole = state.authorRole;
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('submitted!');
+  };
 
   return (
     <div className="App">
@@ -63,33 +68,30 @@ function App() {
         authorName={currentAuthorName}
         authorRole={currentAuthorRole}
       />
-      {currentStep === 1 && (
-        <ContactDetails
-          currentStep={currentStep}
-          title="Contact Details"
-          description="Welcome to United Properties, we are glad to see you! Let’s get started by letting us know a little bit about you"
-          nextStep={incrementStep}
-          previousStep={decrementStep}
-        />
-      )}
-      {currentStep === 2 && (
-        <InvestmentPlans
-          title="Investment plans"
-          description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
-          currentStep={currentStep}
-          nextStep={incrementStep}
-          previousStep={decrementStep}
-        />
-      )}
-      {currentStep === 3 && (
-        <InvestmentPreferences
-          title="Investment preferences"
-          description="This will help us figure out what your investment options are so that we can show you only possibly intresting for you deals"
-          currentStep={currentStep}
-          nextStep={incrementStep}
-          previousStep={decrementStep}
-        />
-      )}
+      <form onSubmit={submitHandler} className="page-content">
+        {currentStep === 1 && (
+          <ContactDetails
+            currentStep={currentStep}
+            nextStep={incrementStep}
+            previousStep={decrementStep}
+            onSubmit={submitHandler}
+          />
+        )}
+        {currentStep === 2 && (
+          <InvestmentPlans
+            currentStep={currentStep}
+            nextStep={incrementStep}
+            previousStep={decrementStep}
+          />
+        )}
+        {currentStep === 3 && (
+          <InvestmentPreferences
+            currentStep={currentStep}
+            nextStep={incrementStep}
+            previousStep={decrementStep}
+          />
+        )}
+      </form>
     </div>
   );
 }

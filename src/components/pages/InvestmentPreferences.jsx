@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
+import { TitleDescription } from '../TitleDescription';
 import './InvestmentPreferences.scss';
 
 export const InvestmentPreferences = (props) => {
@@ -19,10 +20,10 @@ export const InvestmentPreferences = (props) => {
       <section className="page-content">
         <PageHeader step={props.currentStep} />
         <div className="investment-preferences">
-          <div className="title-description">
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-          </div>
+          <TitleDescription
+            title="Investment preferences"
+            description="This will help us figure out what your investment options are so that we can show you only possibly intresting for you deals"
+          />
           <h4>What kind of real estate are you intrested in?</h4>
           <div className="choice__cards">
             {realEstates.map((element, index) => (
