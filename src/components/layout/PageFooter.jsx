@@ -11,13 +11,19 @@ export const PageFooter = (props) => {
           </a>
         )}
         <div className="actions">
-          <button className="skip">Skip for now</button>
+          <a href="#" className="skip">
+            Skip for now
+          </a>
           {props.currentStep >= 1 && props.currentStep < 3 && (
             <button type="button" className="next" onClick={props.nextStep}>
               Next step &rarr;
             </button>
           )}
-          {props.currentStep === 3 && <button className="next">Finish</button>}
+          {props.currentStep === 3 && (
+            <button type="submit" className="next">
+              Finish
+            </button>
+          )}
         </div>
       </footer>
     </React.Fragment>

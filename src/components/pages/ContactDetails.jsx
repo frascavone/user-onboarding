@@ -1,12 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
 import styles from './ContactDetails.module.scss';
 
 export const ContactDetails = (props) => {
-  const fullName = useRef();
-
   return (
     <React.Fragment>
       <PageHeader step={props.currentStep} />
@@ -20,8 +18,13 @@ export const ContactDetails = (props) => {
             <div
               className={`${styles['form-control']}  ${styles['form-control__fullname']}`}
             >
-              <label htmlFor="fullname">Full name</label>
-              <input ref={fullName} type="text" id="fullname" />
+              <label htmlFor="fullName">Full name</label>
+              <input
+                type="text"
+                id="fullName"
+                value={props.values.fullName}
+                onChange={props.onChange('fullName')}
+              />
             </div>
             <div
               className={`${styles['form-control']}  ${styles['form-control__phone']}`}
@@ -46,7 +49,7 @@ export const ContactDetails = (props) => {
         <TitleDescription
           title="Privacy Policy"
           description="We know you care about how your personal information is used and shared, so we take your privacy seriously"
-          size="1.8rem"
+          second
         >
           <a href="#">Expand privacy policy &rarr;</a>
         </TitleDescription>

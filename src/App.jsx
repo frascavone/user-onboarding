@@ -29,30 +29,70 @@ function App() {
     quote: quotes[0].quote,
     authorName: quotes[0].authorName,
     authorRole: quotes[0].authorRole,
+    fullName: '',
+    phone: '',
+    email: '',
+    country: '',
+    from: '',
+    to: '',
+    isInvestor: false,
+    realEstates: [],
   });
 
-  const currentStep = state.step;
-  const currentQuote = state.quote;
-  const currentAuthorName = state.authorName;
-  const currentAuthorRole = state.authorRole;
+  const {
+    step: currentStep,
+    quote: currentQuote,
+    authorName: currentAuthorName,
+    authorRole: currentAuthorRole,
+    fullName,
+    phone,
+    email,
+    country,
+    from,
+    to,
+    isInvestor,
+    realEstates,
+  } = state;
+
+  const values = {
+    fullName,
+    phone,
+    email,
+    country,
+    from,
+    to,
+    isInvestor,
+    realEstates,
+  };
 
   const incrementStep = () => {
-    const newStep = state.step + 1;
-    setState({
-      step: newStep,
-      quote: quotes[newStep - 1].quote,
-      authorName: quotes[newStep - 1].authorName,
-      authorRole: quotes[newStep - 1].authorRole,
+    setState((prevState) => {
+      const newStep = state.step + 1;
+      return {
+        ...prevState,
+        step: newStep,
+        quote: quotes[newStep - 1].quote,
+        authorName: quotes[newStep - 1].authorName,
+        authorRole: quotes[newStep - 1].authorRole,
+      };
     });
   };
   const decrementStep = () => {
-    const newStep = state.step - 1;
-    setState({
-      step: newStep,
-      quote: quotes[newStep - 1].quote,
-      authorName: quotes[newStep - 1].authorName,
-      authorRole: quotes[newStep - 1].authorRole,
+    setState((prevState) => {
+      const newStep = state.step - 1;
+      return {
+        ...prevState,
+        step: newStep,
+        quote: quotes[newStep - 1].quote,
+        authorName: quotes[newStep - 1].authorName,
+        authorRole: quotes[newStep - 1].authorRole,
+      };
     });
+  };
+
+  const changeHandler = (input) => (e) => {
+    e.preventDefault();
+    setState((prevState) => ({ ...prevState, [input]: e.target.value }));
   };
 
   const submitHandler = (e) => {
@@ -73,8 +113,8 @@ function App() {
           <ContactDetails
             currentStep={currentStep}
             nextStep={incrementStep}
-            previousStep={decrementStep}
-            onSubmit={submitHandler}
+            onChange={changeHandler}
+            values={values}
           />
         )}
         {currentStep === 2 && (
@@ -82,12 +122,12 @@ function App() {
             currentStep={currentStep}
             nextStep={incrementStep}
             previousStep={decrementStep}
+            onChange={changeHandler}
           />
         )}
         {currentStep === 3 && (
           <InvestmentPreferences
             currentStep={currentStep}
-            nextStep={incrementStep}
             previousStep={decrementStep}
           />
         )}
