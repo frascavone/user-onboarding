@@ -2,52 +2,66 @@ import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
-import styles from './InvestmentPlans.module.scss';
 
-export const InvestmentPlans = (props) => {
+export const InvestmentPlans = ({
+  step,
+  onChange,
+  previousStep,
+  nextStep,
+  state,
+}) => {
   return (
     <React.Fragment>
-      <section className="page-content">
-        <PageHeader step={props.currentStep} />
-        <div className={styles['investment-plans']}>
-          <TitleDescription
-            title="Investment plans"
-            description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
-          />
-          <h4>Ho much are you planning to invest in this year?</h4>
-          <div className="row">
-            <div className={styles['form-control']}>
-              <label htmlFor="from">
-                From
-                <input type="text" id="from" defaultValue={'$'} />
-              </label>
-            </div>
-            <div className={styles['form-control']}>
-              <label htmlFor="to">
-                To
-                <input type="text" id="to" defaultValue={'$'} />
-              </label>
-            </div>
+      <PageHeader step={step} />
+      <div className="investment-plans">
+        <TitleDescription
+          title="Investment plans"
+          description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
+        />
+        <h3>Ho much are you planning to invest in this year?</h3>
+        <div className="row">
+          <div className="form-control">
+            <label htmlFor="from">
+              From
+              <input
+                type="text"
+                id="from"
+                value={state.from}
+                onChange={onChange('from')}
+              />
+            </label>
           </div>
-          <div className={styles.slider}>
-            <div className={styles['slider__bar']}></div>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <div className={styles['slider__fill']}></div>
+          <div className="form-control">
+            <label htmlFor="to">
+              To
+              <input
+                type="text"
+                id="to"
+                value={state.to}
+                onChange={onChange('to')}
+              />
+            </label>
           </div>
-          <datalist id="plans">
-            <option value="10" label="$10,000"></option>
-            <option value="50" label="$50,000"></option>
-            <option value="100" label="$100,000"></option>
-            <option value="200" label="$200,000"></option>
-            <option value="500" label="$500,000"></option>
-            <option value="1000" label="$1,000,000+"></option>
-          </datalist>
-          {/* <input
+        </div>
+        <div className="slider">
+          <div className="slider__bar"></div>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div className="slider__fill"></div>
+        </div>
+        <datalist id="plans">
+          <option value="10" label="$10,000"></option>
+          <option value="50" label="$50,000"></option>
+          <option value="100" label="$100,000"></option>
+          <option value="200" label="$200,000"></option>
+          <option value="500" label="$500,000"></option>
+          <option value="1000" label="$1,000,000+"></option>
+        </datalist>
+        {/* <input
             id="investmentRange"
             type="range"
             min="10"
@@ -55,20 +69,28 @@ export const InvestmentPlans = (props) => {
             name="range"
             list="plans"
           /> */}
-          <h3>Are you an accredited investor?</h3>
-          <div className={styles.investor}>
-            <input type="radio" name="isIvestor" id={styles['isInvestor']} />
-            <label htmlFor={styles['isInvestor']}>Yes</label>
-            <input type="radio" name="isIvestor" id={styles['isNotInvestor']} />
-            <label htmlFor={styles['isNotInvestor']}>No</label>
-          </div>
+        <h3>Are you an accredited investor?</h3>
+        <div className="investor">
+          <input
+            type="radio"
+            name="isInvestor"
+            id="isInvestor"
+            value={true}
+            onInput={onChange('isInvestor')}
+          />
+          <label htmlFor="isInvestor">Yes</label>
+          <input
+            type="radio"
+            name="isInvestor"
+            id="isNotInvestor"
+            value={false}
+            onInput={onChange('isInvestor')}
+            defaultChecked
+          />
+          <label htmlFor="isNotInvestor">No</label>
         </div>
-        <PageFooter
-          currentStep={props.currentStep}
-          nextStep={props.nextStep}
-          previousStep={props.previousStep}
-        />
-      </section>
+      </div>
+      <PageFooter step={step} nextStep={nextStep} previousStep={previousStep} />
     </React.Fragment>
   );
 };
