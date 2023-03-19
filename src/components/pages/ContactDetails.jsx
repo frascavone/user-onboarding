@@ -40,7 +40,7 @@ export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
               )}
             </div> */}
             <Input
-              type="tel"
+              type="number"
               class="form-control__phone"
               id="phone"
               value={state.phone.val}
@@ -48,8 +48,12 @@ export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
               onChange={onChange('phone')}
               onBlur={onBlur('phone')}
             >
-              <select name="phone" id="phone">
-                <option value="it">🇮🇹</option>
+              <select
+                onChange={onChange('phonePrefix')}
+                name="phone"
+                id="phone"
+              >
+                <option value="+39">🇮🇹</option>
               </select>
             </Input>
           </div>

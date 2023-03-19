@@ -2,9 +2,9 @@ import './App.scss';
 import { LeftBlock } from './components/layout/LeftBlock';
 import { ContactDetails } from './components/pages/ContactDetails';
 import { InvestmentPlans } from './components/pages/InvestmentPlans';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
-import * as helpers from './validators.js';
+import { stateReducer } from './reducer';
 
 function App() {
   const steps = [
@@ -44,9 +44,9 @@ function App() {
     });
   };
 
-  const [state, setState] = useState({
+  const [state, dispatch] = useReducer(stateReducer, {
     fullName: { val: '', isValid: null },
-    phone: { val: '', isValid: null },
+    phone: { prefix: '', val: '', isValid: null },
     email: { val: '', isValid: null },
     country: { val: '', isValid: null },
     from: { val: '$', isValid: null },
@@ -65,84 +65,19 @@ function App() {
   });
 
   const changeHandler = (inputName) => (e) => {
-    const inputValue = e.target.value;
-    if (
-      inputName === 'realEstates' &&
-      !prevState.realEstates.includes(inputValue)
-    ) {
-      const toggledOption = prevState.realEstates.find(
-        (el) => el.type === inputValue
-      );
-      toggledOption.val = !toggledOption.val;
-      return { ...prevState };
-    }
-    if (inputName === 'isInvestor') {
-      setState((prevState) => {
-        if (inputValue) {
-          prevState.isInvestor = true;
-          return { ...prevState };
-        } else prevState.isInvestor = false;
-        return { ...prevState };
-      });
-      return;
-    }
-    setState((prevState) => ({
-      ...prevState,
-      [inputName]: { ...prevState[inputName], val: inputValue },
-    }));
+    dispatch({ type: 'USER_INPUT', input: inputName, value: e.target.value });
   };
 
   const validateInput = (inputName) => (e) => {
-    const inputValue = e.target.value;
-    setState((prevState) => {
-      if (inputName === 'fullName' && helpers.validateName(inputValue)) {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      if (inputName === 'phone' && helpers.validatePhone(inputValue)) {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      if (inputName === 'email' && helpers.validateEmail(inputValue)) {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      if (inputName === 'country' && inputValue !== '') {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      if (inputName === 'from' && helpers.validateFrom(inputValue)) {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      if (inputName === 'to' && helpers.validateTo(inputValue)) {
-        return {
-          ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: true },
-        };
-      }
-      return {
-        ...prevState,
-        [inputName]: { ...prevState[inputName], isValid: false },
-      };
-    });
+    dispatch({ type: 'VALIDATION', input: inputName, value: e.target.value });
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(`submitted this: `, state);
   };
 
-  console.log(state.fullName, state.phone);
+  console.log(state);
 
   return (
     <div className="App">

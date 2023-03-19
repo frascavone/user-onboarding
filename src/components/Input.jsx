@@ -14,6 +14,12 @@ export const Input = (props) => {
         onChange={props.onChange}
         onBlur={props.onBlur}
       />
+      {props.id === 'fullName' && props.isValid === false && (
+        <p>Inserire un nome e cognome separati da uno spazio.</p>
+      )}
+      {props.id === 'phone' && props.isValid === false && (
+        <p>Inserire un numero di telefono valido.</p>
+      )}
     </div>
   );
 };

@@ -16,6 +16,12 @@ export const validateEmail = (string) => {
     return true;
   } else return false;
 };
+export const validateCountry = (string) => {
+  if (string !== '') {
+    console.log('country valida');
+    return true;
+  } else return false;
+};
 export const validateFrom = (string) => {
   if (string.startsWith('$') && string.length > 3) {
     console.log('valore from valido');
