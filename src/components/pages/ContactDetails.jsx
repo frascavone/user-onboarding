@@ -1,10 +1,11 @@
 import React from 'react';
+import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
 // import styles from './ContactDetails.module.scss';
 
-export const ContactDetails = ({ step, onChange, nextStep, state }) => {
+export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -15,43 +16,64 @@ export const ContactDetails = ({ step, onChange, nextStep, state }) => {
         />
         <div className="form">
           <div className="row">
-            <div className="form-control form-control__fullname">
+            <Input
+              label="Fullname"
+              class="form-control__fullname"
+              type="text"
+              id="fullName"
+              value={state.fullName.val}
+              isValid={state.fullName.isValid}
+              onChange={onChange('fullName')}
+              onBlur={onBlur('fullName')}
+            />
+            {/* <div className="form-control form-control__fullname">
               <label htmlFor="fullName">Full name</label>
               <input
                 type="text"
                 id="fullName"
-                value={state.fullName}
+                value={state.fullName.val}
                 onChange={onChange('fullName')}
+                onBlur={onBlur('fullName')}
               />
-            </div>
-            <div className="form-control form-control__phone">
+              {state.fullName.isValid === false && (
+                <p>Per favore ricompila i campi errati.</p>
+              )}
+            </div> */}
+            <Input
+              type="tel"
+              class="form-control__phone"
+              id="phone"
+              value={state.phone.val}
+              isValid={state.phone.isValid}
+              onChange={onChange('phone')}
+              onBlur={onBlur('phone')}
+            >
               <select name="phone" id="phone">
                 <option value="it">🇮🇹</option>
               </select>
-              <input
-                type="tel"
-                id="phone"
-                value={state.phone}
-                onChange={onChange('phone')}
-              />
-            </div>
+            </Input>
           </div>
-          <div className="form-control">
-            <label htmlFor="email">Email address</label>
-            <input
-              type="text"
-              id="email"
-              value={state.email}
-              onChange={onChange('email')}
-            />
-          </div>
-          <div className="form-control">
+          <Input
+            label="Email"
+            type="text"
+            id="email"
+            value={state.email.val}
+            isValid={state.email.isValid}
+            onChange={onChange('email')}
+            onBlur={onBlur('email')}
+          />
+          <div
+            className={`form-control ${
+              state.country.isValid === false ? 'invalid' : ''
+            }`}
+          >
             <label htmlFor="country">Country</label>
             <select
               name="countries"
               id="country"
-              value={state.country}
+              value={state.country.val}
               onChange={onChange('country')}
+              onBlur={onBlur('country')}
             >
               <option value="">--Please choose an option--</option>
               <option value="Austria">Austria</option>

@@ -4,6 +4,7 @@ import { ContactDetails } from './components/pages/ContactDetails';
 import { InvestmentPlans } from './components/pages/InvestmentPlans';
 import { useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
+import * as helpers from './validators.js';
 
 function App() {
   const steps = [
@@ -27,70 +28,121 @@ function App() {
     },
   ];
 
-  const [state, setState] = useState({
-    step: steps[0],
-    fullName: '',
-    phone: '',
-    email: '',
-    country: '',
-    from: '$',
-    to: '$',
-    isInvestor: false,
-    realEstates: [
-      { type: 'Single family', val: false },
-      { type: 'Residential multifamily', val: false },
-      { type: 'Commercial retail', val: false },
-      { type: 'Commercial industrial', val: false },
-      { type: 'Commercial hospitality', val: false },
-      { type: 'Commercial warehousing', val: false },
-      { type: 'Commercial office', val: false },
-      { type: 'Other', val: false },
-    ],
-  });
-
-  const currentStep = state.step;
+  const [currentStep, setCurrentStep] = useState(steps[0]);
 
   const incrementStep = () => {
-    setState((prevState) => {
-      const stepIndex = prevState.step.stepNum - 1;
-      return {
-        ...prevState,
-        step: steps[stepIndex + 1],
-      };
+    setCurrentStep((prevState) => {
+      const stepIndex = prevState.stepNum - 1;
+      return steps[stepIndex + 1];
     });
   };
 
   const decrementStep = () => {
+    setCurrentStep((prevState) => {
+      const stepIndex = prevState.stepNum - 1;
+      return steps[stepIndex - 1];
+    });
+  };
+
+  const [state, setState] = useState({
+    fullName: { val: '', isValid: null },
+    phone: { val: '', isValid: null },
+    email: { val: '', isValid: null },
+    country: { val: '', isValid: null },
+    from: { val: '$', isValid: null },
+    to: { val: '$', isValid: null },
+    isInvestor: null,
+    realEstates: [
+      { type: 'Single family', val: null },
+      { type: 'Residential multifamily', val: null },
+      { type: 'Commercial retail', val: null },
+      { type: 'Commercial industrial', val: null },
+      { type: 'Commercial hospitality', val: null },
+      { type: 'Commercial warehousing', val: null },
+      { type: 'Commercial office', val: null },
+      { type: 'Other', val: null },
+    ],
+  });
+
+  const changeHandler = (inputName) => (e) => {
+    const inputValue = e.target.value;
+    if (
+      inputName === 'realEstates' &&
+      !prevState.realEstates.includes(inputValue)
+    ) {
+      const toggledOption = prevState.realEstates.find(
+        (el) => el.type === inputValue
+      );
+      toggledOption.val = !toggledOption.val;
+      return { ...prevState };
+    }
+    if (inputName === 'isInvestor') {
+      setState((prevState) => {
+        if (inputValue) {
+          prevState.isInvestor = true;
+          return { ...prevState };
+        } else prevState.isInvestor = false;
+        return { ...prevState };
+      });
+      return;
+    }
+    setState((prevState) => ({
+      ...prevState,
+      [inputName]: { ...prevState[inputName], val: inputValue },
+    }));
+  };
+
+  const validateInput = (inputName) => (e) => {
+    const inputValue = e.target.value;
     setState((prevState) => {
-      const stepIndex = prevState.step.stepNum - 1;
+      if (inputName === 'fullName' && helpers.validateName(inputValue)) {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
+      if (inputName === 'phone' && helpers.validatePhone(inputValue)) {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
+      if (inputName === 'email' && helpers.validateEmail(inputValue)) {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
+      if (inputName === 'country' && inputValue !== '') {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
+      if (inputName === 'from' && helpers.validateFrom(inputValue)) {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
+      if (inputName === 'to' && helpers.validateTo(inputValue)) {
+        return {
+          ...prevState,
+          [inputName]: { ...prevState[inputName], isValid: true },
+        };
+      }
       return {
         ...prevState,
-        step: steps[stepIndex - 1],
+        [inputName]: { ...prevState[inputName], isValid: false },
       };
     });
   };
-
-  const changeHandler = (input) => (e) => {
-    e.preventDefault();
-    setState((prevState) => {
-      if (
-        input === 'realEstates' &&
-        !prevState.realEstates.includes(e.target.value)
-      ) {
-        const toggledOption = prevState.realEstates.find(
-          (el) => el.type === e.target.value
-        );
-        toggledOption.val = !toggledOption.val;
-        return { ...prevState };
-      }
-      return { ...prevState, [input]: e.target.value };
-    });
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(`submitted this: `, state);
   };
+
+  console.log(state.fullName, state.phone);
 
   return (
     <div className="App">
@@ -101,6 +153,7 @@ function App() {
             step={currentStep.stepNum}
             nextStep={incrementStep}
             onChange={changeHandler}
+            onBlur={validateInput}
             state={state}
           />
         )}
@@ -110,6 +163,7 @@ function App() {
             nextStep={incrementStep}
             previousStep={decrementStep}
             onChange={changeHandler}
+            onBlur={validateInput}
             state={state}
           />
         )}
@@ -119,6 +173,7 @@ function App() {
             previousStep={decrementStep}
             onChange={changeHandler}
             estates={state.realEstates}
+            onBlur={validateInput}
           />
         )}
       </form>

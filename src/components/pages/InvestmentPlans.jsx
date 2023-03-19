@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
@@ -6,6 +7,7 @@ import { TitleDescription } from '../TitleDescription';
 export const InvestmentPlans = ({
   step,
   onChange,
+  onBlur,
   previousStep,
   nextStep,
   state,
@@ -20,28 +22,24 @@ export const InvestmentPlans = ({
         />
         <h3>Ho much are you planning to invest in this year?</h3>
         <div className="row">
-          <div className="form-control">
-            <label htmlFor="from">
-              From
-              <input
-                type="text"
-                id="from"
-                value={state.from}
-                onChange={onChange('from')}
-              />
-            </label>
-          </div>
-          <div className="form-control">
-            <label htmlFor="to">
-              To
-              <input
-                type="text"
-                id="to"
-                value={state.to}
-                onChange={onChange('to')}
-              />
-            </label>
-          </div>
+          <Input
+            label="From"
+            type="text"
+            id="from"
+            value={state.from.val}
+            isValid={state.from.isValid}
+            onChange={onChange('from')}
+            onBlur={onBlur('from')}
+          />
+          <Input
+            label="To"
+            type="text"
+            id="to"
+            value={state.to.val}
+            isValid={state.to.isValid}
+            onChange={onChange('to')}
+            onBlur={onBlur('to')}
+          />
         </div>
         <div className="slider">
           <div className="slider__bar"></div>
@@ -75,7 +73,6 @@ export const InvestmentPlans = ({
             type="radio"
             name="isInvestor"
             id="isInvestor"
-            value={true}
             onInput={onChange('isInvestor')}
           />
           <label htmlFor="isInvestor">Yes</label>
@@ -83,7 +80,7 @@ export const InvestmentPlans = ({
             type="radio"
             name="isInvestor"
             id="isNotInvestor"
-            value={false}
+            value={''}
             onInput={onChange('isInvestor')}
             defaultChecked
           />

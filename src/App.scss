@@ -224,6 +224,7 @@ button {
   .row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   label {
     font-size: 1rem;
@@ -232,6 +233,18 @@ button {
     }
   }
   .form-control {
+    &.invalid input {
+      border: none;
+      border-bottom: 2px solid #f6aaa1;
+      color: #f6aaa1;
+      padding: 0.5rem 0;
+    }
+    &.invalid label {
+      color: #f6aaa1;
+    }
+    &.invalid select {
+      color: #f6aaa1;
+    }
     display: flex;
     flex-direction: column;
     margin: 2rem 0;
@@ -260,6 +273,9 @@ button {
       border: none;
       border-bottom: 2px solid var(--main-font-color);
       margin: 1rem 0 0 0;
+    }
+    p {
+      color: salmon;
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ProgressItem } from './ProgressItem';
 
 export const ProgressStatus = (props) => {
