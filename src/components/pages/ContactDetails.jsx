@@ -3,7 +3,6 @@ import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
-// import styles from './ContactDetails.module.scss';
 
 export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
   return (

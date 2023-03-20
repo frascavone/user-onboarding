@@ -4,7 +4,7 @@ export const PageFooter = (props) => {
   const currentStep = props.step;
   return (
     <React.Fragment>
-      <footer>
+      <footer className="page-footer">
         {currentStep === 1 && <a href="#">&larr; Back to the homepage</a>}
         {currentStep > 1 && (
           <a href="#" onClick={props.previousStep}>
