@@ -5,20 +5,27 @@ export const Input = (props) => {
         props.isValid === false ? 'invalid' : ''
       }`}
     >
-      <label htmlFor={props.id}>{props.label}</label>
       {props.children}
-      <input
-        type={props.type}
-        id={props.id}
-        value={props.value}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
-      />
-      {props.id === 'fullName' && props.isValid === false && (
-        <p>Inserire un nome e cognome separati da uno spazio.</p>
+      <label htmlFor={props.id}>
+        {props.label}
+        <input
+          type={props.type}
+          pattern={props.pattern}
+          maxLength={props.maxLength}
+          id={props.id}
+          value={props.value}
+          onChange={props.onChange}
+          onBlur={props.onBlur}
+        />
+      </label>
+      {props.id === 'email' && props.isValid === false && (
+        <p id="invalid__message">Please insert a valid email.</p>
       )}
-      {props.id === 'phone' && props.isValid === false && (
-        <p>Inserire un numero di telefono valido.</p>
+      {props.id === 'from' && props.isValid === false && (
+        <p id="invalid__message">Please insert a valid number.</p>
+      )}
+      {props.id === 'to' && props.isValid === false && (
+        <p id="invalid__message">Please insert a valid number.</p>
       )}
     </div>
   );

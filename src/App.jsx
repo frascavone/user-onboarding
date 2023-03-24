@@ -27,7 +27,6 @@ function App() {
       authorRole: 'managing director',
     },
   ];
-
   const [currentStep, setCurrentStep] = useState(steps[0]);
 
   const incrementStep = () => {
@@ -44,14 +43,50 @@ function App() {
     });
   };
 
+  const countries = [
+    { name: 'Austria', currency: 'EUR', dialCode: '+43', flag: 'AT' },
+    { name: 'Belgium', currency: 'EUR', dialCode: '+32', flag: 'BE' },
+    { name: 'France', currency: 'EUR', dialCode: '+33', flag: 'FR' },
+    { name: 'Germany', currency: 'EUR', dialCode: '+49', flag: 'DE' },
+    { name: 'Italy', currency: 'EUR', dialCode: '+39', flag: 'IT' },
+    { name: 'Japan', currency: 'JPN', dialCode: '+81', flag: 'JP' },
+    { name: 'Poland', currency: 'EUR', dialCode: '+48', flag: 'PL' },
+    { name: 'Spain', currency: 'EUR', dialCode: '+34', flag: 'ES' },
+    { name: 'Switzerland', currency: 'CHF', dialCode: '+41', flag: 'CH' },
+    { name: 'Uk', currency: 'EUR', dialCode: '+44', flag: 'UK' },
+    { name: 'Ukraine', currency: 'EUR', dialCode: '+380', flag: 'UA' },
+    { name: 'United States', currency: 'USD', dialCode: '+1', flag: 'US' },
+  ];
+
+  const rangeSteps = [10000, 20000, 50000, 100000, 200000, 500000, 1000000];
+
+  const getCurrencySymbol = (locale, currency) =>
+    (0)
+      .toLocaleString(locale, {
+        style: 'currency',
+        currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })
+      .replace(/\d/g, '')
+      .trim();
+
   const [state, dispatch] = useReducer(stateReducer, {
     fullName: { val: '', isValid: null },
-    phone: { prefix: '', val: '', isValid: null },
+    phone: { val: '', isValid: null },
     email: { val: '', isValid: null },
-    country: { val: '', isValid: null },
-    from: { val: '$', isValid: null },
-    to: { val: '$', isValid: null },
-    isInvestor: null,
+    country: { val: '', isValid: null, currency: 'EUR' },
+    range: {
+      from: {
+        val: getCurrencySymbol(navigator.language, 'EUR'),
+        isValid: null,
+      },
+      to: {
+        val: getCurrencySymbol(navigator.language, 'EUR'),
+        isValid: null,
+      },
+    },
+    isInvestor: false,
     realEstates: [
       { type: 'Single family', val: null },
       { type: 'Residential multifamily', val: null },
@@ -65,11 +100,16 @@ function App() {
   });
 
   const changeHandler = (inputName) => (e) => {
-    dispatch({ type: 'USER_INPUT', input: inputName, value: e.target.value });
+    if (
+      (e.target.value !== '' || e.target.value === Boolean) &&
+      e.target.value !== undefined
+    )
+      dispatch({ type: 'USER_INPUT', input: inputName, value: e.target.value });
   };
 
   const validateInput = (inputName) => (e) => {
-    dispatch({ type: 'VALIDATION', input: inputName, value: e.target.value });
+    if (e.target.value !== '')
+      dispatch({ type: 'VALIDATION', input: inputName, value: e.target.value });
   };
 
   const submitHandler = (e) => {
@@ -77,7 +117,7 @@ function App() {
     console.log(`submitted this: `, state);
   };
 
-  console.log(state);
+  console.log(state.range.from, state.range.to);
 
   return (
     <div className="App">
@@ -89,6 +129,7 @@ function App() {
             nextStep={incrementStep}
             onChange={changeHandler}
             onBlur={validateInput}
+            countries={countries}
             state={state}
           />
         )}
@@ -100,6 +141,7 @@ function App() {
             onChange={changeHandler}
             onBlur={validateInput}
             state={state}
+            rangeSteps={rangeSteps}
           />
         )}
         {currentStep.stepNum === 3 && (

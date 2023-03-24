@@ -99,6 +99,9 @@ body {
       margin: 1rem 0;
       &__phone {
         margin-top: 2rem;
+        label {
+          width: 100%;
+        }
       }
     }
   }

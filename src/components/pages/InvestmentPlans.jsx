@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
+import { Slider } from '../Slider';
 import { TitleDescription } from '../TitleDescription';
 
 export const InvestmentPlans = ({
@@ -11,6 +12,7 @@ export const InvestmentPlans = ({
   previousStep,
   nextStep,
   state,
+  rangeSteps,
 }) => {
   return (
     <React.Fragment>
@@ -26,8 +28,8 @@ export const InvestmentPlans = ({
             label="From"
             type="text"
             id="from"
-            value={state.from.val}
-            isValid={state.from.isValid}
+            value={state.range.from.val}
+            isValid={state.range.from.isValid}
             onChange={onChange('from')}
             onBlur={onBlur('from')}
           />
@@ -35,38 +37,19 @@ export const InvestmentPlans = ({
             label="To"
             type="text"
             id="to"
-            value={state.to.val}
-            isValid={state.to.isValid}
+            value={state.range.to.val}
+            isValid={state.range.to.isValid}
             onChange={onChange('to')}
             onBlur={onBlur('to')}
           />
         </div>
-        <div className="slider">
-          <div className="slider__bar"></div>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <div className="slider__fill"></div>
-        </div>
-        <datalist id="plans">
-          <option value="10" label="$10,000"></option>
-          <option value="50" label="$50,000"></option>
-          <option value="100" label="$100,000"></option>
-          <option value="200" label="$200,000"></option>
-          <option value="500" label="$500,000"></option>
-          <option value="1000" label="$1,000,000+"></option>
-        </datalist>
-        {/* <input
-            id="investmentRange"
-            type="range"
-            min="10"
-            max="1000"
-            name="range"
-            list="plans"
-          /> */}
+        <Slider
+          from={state.range.from.val}
+          to={state.range.to.val}
+          currency={state.country.currency}
+          rangeSteps={rangeSteps}
+          onChange={onChange('range')}
+        />
         <h3>Are you an accredited investor?</h3>
         <div className="investor">
           <input

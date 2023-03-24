@@ -87,7 +87,7 @@ label {
 
       &__dot {
         display: none;
-        height: 1rem;
+        height: 0.9rem;
         background-color: var(--main-bg-color);
         border-radius: 2px;
         &.active {
@@ -145,6 +145,71 @@ label {
       bottom: 1.5rem;
     }
   }
+}
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  &:focus {
+    color: var(--main-color);
+  }
+  &:focus-within {
+    color: var(--main-color);
+  }
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  &__phone {
+    flex-direction: row;
+    align-items: end;
+    width: 50%;
+    & select {
+      display: flex;
+    }
+    & input {
+      width: 100%;
+    }
+  }
+  &__fullname {
+    margin-right: 2rem;
+    & input {
+      text-transform: capitalize;
+    }
+  }
+  & input {
+    border: none;
+    border-bottom: 2px solid var(--main-font-color);
+    padding: 0.5rem 0;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid var(--main-color);
+      font-weight: 600;
+    }
+  }
+  & select {
+    display: inline;
+    border: none;
+    border-bottom: 2px solid var(--main-font-color);
+    margin: 1rem 0 0 0;
+  }
+  &.invalid input {
+    border: none;
+    border-bottom: 2px solid #f6aaa1;
+    color: #f6aaa1;
+    padding: 0.5rem 0;
+  }
+  &.invalid label {
+    color: #f6aaa1;
+  }
+  &.invalid select {
+    color: #f6aaa1;
+    border-bottom: 2px solid #f6aaa1;
+  }
+}
+#invalid__message {
+  color: salmon;
 }
 
 // PAGE CONTENT //////////////////////////
@@ -221,61 +286,9 @@ button {
     flex-direction: column;
   }
   .row {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
-  label {
-    font-size: 1rem;
-    &:focus {
-      color: var(--main-color);
-    }
-  }
-  .form-control {
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 0;
-    &__phone {
-      flex-direction: row;
-      width: 50%;
-      & input {
-        width: 100%;
-      }
-    }
-    &__fullname {
-      width: 50%;
-      margin-right: 2rem;
-    }
-    & input {
-      border: none;
-      border-bottom: 2px solid var(--main-font-color);
-      padding: 0.5rem 0;
-      &:focus {
-        outline: none;
-        border-bottom: 2px solid var(--main-color);
-        font-weight: 600;
-      }
-    }
-    & select {
-      border: none;
-      border-bottom: 2px solid var(--main-font-color);
-      margin: 1rem 0 0 0;
-    }
-    &.invalid input {
-      border: none;
-      border-bottom: 2px solid #f6aaa1;
-      color: #f6aaa1;
-      padding: 0.5rem 0;
-    }
-    &.invalid label {
-      color: #f6aaa1;
-    }
-    &.invalid select {
-      color: #f6aaa1;
-    }
-    p {
-      color: salmon;
-    }
   }
 }
 
@@ -292,32 +305,13 @@ button {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
+    & #from {
+      margin-right: 2rem;
+    }
   }
   p {
     font-size: 1.2rem;
     color: var(--main-font-color);
-  }
-  .form-control {
-    & label:focus-within {
-      color: var(--main-color);
-    }
-    & input {
-      border: none;
-      display: block;
-      border-bottom: 2px solid var(--main-font-color);
-      padding: 0.5rem 0;
-      margin: 0 2rem 2rem 0;
-      &:focus {
-        outline: none;
-        border-bottom: 2px solid var(--main-color);
-        font-weight: 600;
-        margin: 0 2rem 2rem 0;
-      }
-    }
-  }
-  input[type='range'] {
-    // display: none;
-    width: 100%;
   }
   .slider {
     width: 97%;
@@ -327,38 +321,74 @@ button {
     display: flex;
     justify-content: space-between;
     position: relative;
+    // cursor: pointer;
+    option:focus {
+      background-color: #35a0ee;
+      color: #35a0ee;
+    }
     &__bar {
       width: 100%;
       height: 3px;
-      position: absolute;
+      position: relative;
       background-color: var(--main-font-color);
+      display: flex;
+      justify-content: space-between;
     }
-    & span::after {
+    & .notch {
+      padding: 0;
+    }
+    & .notch::after {
       content: '';
-      height: 10px;
+      margin: 0 10rem 0 0;
+      height: 12px;
       width: 3px;
       background-color: var(--main-font-color);
       position: absolute;
-      top: -3px;
+      top: -4px;
     }
+    & .notch.start::after {
+      height: 12px;
+      width: 10px;
+      position: absolute;
+      top: -4px;
+      background-color: var(--main-color);
+    }
+    & .notch.active::after {
+      height: 12px;
+      width: 3px;
+      position: absolute;
+      top: -4px;
+      background-color: var(--main-color);
+    }
+    & .notch.end::after {
+      height: 12px;
+      width: 10px;
+      position: absolute;
+      top: -4px;
+      background-color: var(--main-color);
+    }
+    &__labels {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      margin-bottom: 4rem;
+      color: var(--main-font-color);
+      option {
+        cursor: pointer;
+      }
+      & option.active {
+        color: var(--main-color);
+      }
+    }
+
     &__fill {
-      width: 50%;
       background-color: var(--main-color);
       height: 3px;
       position: absolute;
     }
   }
-  datalist {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 1rem;
-    margin-bottom: 4rem;
-    color: var(--main-font-color);
-    & option.active {
-      color: var(--main-color);
-    }
-  }
+
   .investor {
     margin-top: 2rem;
     position: relative;

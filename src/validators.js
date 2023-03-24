@@ -1,11 +1,11 @@
 export const validateName = (string) => {
-  if (string.includes(' ')) {
+  if (string.trim().includes(' ')) {
     console.log('nome valido');
     return true;
   } else return false;
 };
 export const validatePhone = (string) => {
-  if (string.length === 10) {
+  if (string.length === 13) {
     console.log('telefono valido');
     return true;
   } else return false;
@@ -23,15 +23,14 @@ export const validateCountry = (string) => {
   } else return false;
 };
 export const validateFrom = (string) => {
-  if (string.startsWith('$') && string.length > 3) {
+  if (string) {
     console.log('valore from valido');
     return true;
   } else return false;
 };
 export const validateTo = (string) => {
-  if (string.startsWith('$') && string.length > 3) {
+  if (string) {
     console.log('valore to valido');
     return true;
   } else return false;
 };
-export default { validateName, validatePhone, validateEmail };

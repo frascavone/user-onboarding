@@ -4,7 +4,14 @@ import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
 
-export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
+export const ContactDetails = ({
+  step,
+  countries,
+  onChange,
+  onBlur,
+  nextStep,
+  state,
+}) => {
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -25,21 +32,10 @@ export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
               onChange={onChange('fullName')}
               onBlur={onBlur('fullName')}
             />
-            {/* <div className="form-control form-control__fullname">
-              <label htmlFor="fullName">Full name</label>
-              <input
-                type="text"
-                id="fullName"
-                value={state.fullName.val}
-                onChange={onChange('fullName')}
-                onBlur={onBlur('fullName')}
-              />
-              {state.fullName.isValid === false && (
-                <p>Per favore ricompila i campi errati.</p>
-              )}
-            </div> */}
             <Input
-              type="number"
+              type="tel"
+              pattern={'[0-9]{3} [0-9]{2} [0-9]{3} [0-9]{4}'}
+              maxLength={15}
               class="form-control__phone"
               id="phone"
               value={state.phone.val}
@@ -48,14 +44,29 @@ export const ContactDetails = ({ step, onChange, onBlur, nextStep, state }) => {
               onBlur={onBlur('phone')}
             >
               <select
-                onChange={onChange('phonePrefix')}
+                onChange={onChange('phone')}
+                value={state.phone.val}
                 name="phone"
                 id="phone"
               >
-                <option value="+39">🇮🇹</option>
+                {countries.map((country) => {
+                  return (
+                    <option key={country.dialCode} value={country.dialCode}>
+                      {country.flag}
+                    </option>
+                  );
+                })}
               </select>
             </Input>
           </div>
+          {state.fullName.isValid === false && (
+            <p id="invalid__message">
+              Please insert your firstname and lastname separated by a space.
+            </p>
+          )}
+          {state.phone.isValid === false && (
+            <p id="invalid__message">Please insert a valid phone number.</p>
+          )}
           <Input
             label="Email"
             type="text"
