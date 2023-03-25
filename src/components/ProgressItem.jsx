@@ -1,7 +1,6 @@
 import React from 'react';
 
-export const ProgressItem = (props) => {
-  const isActive = props.isActive;
+export const ProgressItem = ({ isActive, pagename, isLast }) => {
   return (
     <React.Fragment>
       <div className={`progress__item ${isActive ? 'active' : ''}`}>
@@ -10,14 +9,14 @@ export const ProgressItem = (props) => {
             className={`progress__item__dot ${isActive ? 'active' : ''}`}
           ></span>
         </div>
-        <div className="progress__item__pagename">{props.pagename}</div>
+        <div className="progress__item__pagename">{pagename}</div>
         <div
-          className={`progress__item__dash ${props.isLast ? 'hidden' : ''} ${
+          className={`progress__item__dash ${isLast ? 'hidden' : ''} ${
             isActive ? 'active' : ''
           }`}
         ></div>
         <div
-          className={`progress__item__dash ${props.isLast ? 'hidden' : ''} ${
+          className={`progress__item__dash ${isLast ? 'hidden' : ''} ${
             isActive ? 'active' : ''
           }`}
         ></div>

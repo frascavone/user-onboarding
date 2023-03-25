@@ -147,77 +147,6 @@ label {
   }
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  font-size: 1rem;
-  &:focus {
-    color: var(--main-color);
-  }
-  &:focus-within {
-    color: var(--main-color);
-  }
-}
-.form-control {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 0;
-  &__phone {
-    flex-direction: row;
-    align-items: end;
-    width: 50%;
-    & select {
-      display: flex;
-      width: 25%;
-    }
-    & label {
-      width: 72%;
-    }
-  }
-  &__fullname {
-    margin-right: 2rem;
-    width: 50%;
-    & label {
-      width: 100%;
-    }
-    & input {
-      text-transform: capitalize;
-    }
-  }
-  & input {
-    border: none;
-    border-bottom: 2px solid var(--main-font-color);
-    padding: 0.5rem 0;
-    &:focus {
-      outline: none;
-      border-bottom: 2px solid var(--main-color);
-      font-weight: 600;
-    }
-  }
-  & select {
-    display: inline;
-    border: none;
-    border-bottom: 2px solid var(--main-font-color);
-    margin: 1rem 0 0 0;
-  }
-  &.invalid input {
-    border: none;
-    border-bottom: 2px solid #f6aaa1;
-    color: #f6aaa1;
-    padding: 0.5rem 0;
-  }
-  &.invalid label {
-    color: #f6aaa1;
-  }
-  &.invalid select {
-    color: #f6aaa1;
-    border-bottom: 2px solid #f6aaa1;
-  }
-}
-#invalid__message {
-  color: salmon;
-}
-
 // PAGE CONTENT //////////////////////////
 
 .page-content {
@@ -227,6 +156,86 @@ label {
   align-items: start;
   color: #a4aeb4;
   font-size: 1.2rem;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    width: 100%;
+    font-size: 1.2rem;
+    &:focus {
+      color: var(--main-color);
+    }
+    &:focus-within {
+      color: var(--main-color);
+    }
+    &.form-control__fullname {
+      width: 50%;
+      & label {
+        width: 100%;
+      }
+      & input {
+        text-transform: capitalize;
+      }
+    }
+    &.form-control__phone {
+      flex-direction: row;
+      align-items: end;
+      width: 50%;
+      & select {
+        display: flex;
+        width: 30%;
+      }
+    }
+    input[type='text'],
+    input[type='email'],
+    select {
+      border: 1px solid gray;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid var(--main-font-color);
+      padding: 0.5rem 0;
+    }
+
+    input[type='text']:focus,
+    input[type='email']:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--main-color);
+    }
+
+    button[type='submit'] {
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .title-description {
+      margin: 2rem 0;
+    }
+  }
+  .error__message {
+    color: salmon;
+  }
 }
 .page-header {
   width: 100%;
@@ -295,6 +304,7 @@ button {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: end;
   }
 }
 
@@ -310,7 +320,7 @@ button {
     width: 100%;
     display: flex;
     justify-content: start;
-    flex-wrap: wrap;
+    margin-bottom: 2rem;
     & #from {
       margin-right: 2rem;
     }
@@ -327,7 +337,6 @@ button {
     display: flex;
     justify-content: space-between;
     position: relative;
-    // cursor: pointer;
     option:focus {
       background-color: #35a0ee;
       color: #35a0ee;
@@ -396,6 +405,7 @@ button {
   }
 
   .investor {
+    display: flex;
     margin-top: 2rem;
     position: relative;
     & label {
@@ -448,7 +458,7 @@ button {
         height: 100%;
         border: 1px solid var(--main-font-color);
         border-radius: 4px;
-        padding: 1rem;
+        padding: 0 1rem;
         position: relative;
         display: block;
         color: black;
@@ -460,7 +470,7 @@ button {
         z-index: 1;
         position: absolute;
         left: 1rem;
-        top: 1rem;
+        top: 1.5rem;
         &:checked + label {
           background-color: #dce8ff;
           color: var(--main-color);

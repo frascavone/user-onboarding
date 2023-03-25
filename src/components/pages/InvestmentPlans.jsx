@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
@@ -7,13 +7,43 @@ import { TitleDescription } from '../TitleDescription';
 
 export const InvestmentPlans = ({
   step,
-  onChange,
-  onBlur,
-  previousStep,
-  nextStep,
   state,
   rangeSteps,
+  dispatch,
+  errors,
+  onBack,
+  onNext,
 }) => {
+  const [touched, setTouched] = useState({
+    min: false,
+    max: false,
+  });
+
+  const handleChange = (event) => {
+    if (event.target.name) {
+      const { name, value } = event.target;
+      console.log(name, value);
+      dispatch({ type: `SET_${name.toUpperCase()}`, payload: value });
+    } else {
+      const { value } = event.target;
+      console.log(value);
+      dispatch({ type: `SET_RANGE`, payload: value });
+    }
+  };
+
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    setTouched({ ...touched, [name]: true });
+
+    if (value.trim() === '') {
+      errors[name] = 'This field is required.';
+    } else if (!/^\d+(\.\d{1,2})?$/.test(value)) {
+      errors[name] = 'Please enter a valid currency value.';
+    } else {
+      errors[name] = '';
+    }
+  };
+
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -24,31 +54,40 @@ export const InvestmentPlans = ({
         />
         <h3>Ho much are you planning to invest in this year?</h3>
         <div className="row">
-          <Input
-            label="From"
-            type="text"
-            id="from"
-            value={state.range.from.val}
-            isValid={state.range.from.isValid}
-            onChange={onChange('from')}
-            onBlur={onBlur('from')}
-          />
-          <Input
-            label="To"
-            type="text"
-            id="to"
-            value={state.range.to.val}
-            isValid={state.range.to.isValid}
-            onChange={onChange('to')}
-            onBlur={onBlur('to')}
-          />
+          <label>
+            From
+            <input
+              type="text"
+              name="from"
+              value={state.from}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.from && errors.from && (
+              <div className="error__message">{errors.from}</div>
+            )}
+          </label>
+          <label>
+            To
+            <input
+              type="text"
+              name="to"
+              value={state.to}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.to && errors.to && (
+              <div className="error__message">{errors.to}</div>
+            )}
+          </label>
         </div>
         <Slider
-          from={state.range.from.val}
-          to={state.range.to.val}
-          currency={state.country.currency}
+          name="range"
+          from={state.from}
+          to={state.to}
+          currency={state.currency}
           rangeSteps={rangeSteps}
-          onChange={onChange('range')}
+          onChange={handleChange}
         />
         <h3>Are you an accredited investor?</h3>
         <div className="investor">
@@ -56,7 +95,7 @@ export const InvestmentPlans = ({
             type="radio"
             name="isInvestor"
             id="isInvestor"
-            onInput={onChange('isInvestor')}
+            onInput={handleChange}
           />
           <label htmlFor="isInvestor">Yes</label>
           <input
@@ -64,13 +103,13 @@ export const InvestmentPlans = ({
             name="isInvestor"
             id="isNotInvestor"
             value={''}
-            onInput={onChange('isInvestor')}
+            onInput={handleChange}
             defaultChecked
           />
           <label htmlFor="isNotInvestor">No</label>
         </div>
       </div>
-      <PageFooter step={step} nextStep={nextStep} previousStep={previousStep} />
+      <PageFooter step={step} onNext={onNext} onBack={onBack} />
     </React.Fragment>
   );
 };

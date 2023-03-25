@@ -23,6 +23,7 @@ export const Slider = ({ from, to, rangeSteps, currency, onChange }) => {
               <option
                 key={step}
                 value={step}
+                name="range"
                 onClick={onChange}
                 className={`notch ${step === FROM ? 'start' : ''} ${
                   step === TO ? 'end' : ''
@@ -42,7 +43,7 @@ export const Slider = ({ from, to, rangeSteps, currency, onChange }) => {
           ></div>
         </datalist>
       </div>
-      <datalist className="slider__labels" onClick={onChange}>
+      <datalist name="range" className="slider__labels" onClick={onChange}>
         {rangeSteps.map((step) => {
           return (
             <option

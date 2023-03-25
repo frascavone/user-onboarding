@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../Input';
+
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../TitleDescription';
 
 export const ContactDetails = ({
   step,
-  countries,
-  onChange,
-  onBlur,
-  nextStep,
   state,
+  dispatch,
+  errors,
+  onNext,
+  countries,
 }) => {
+  const [touched, setTouched] = useState({
+    fullName: false,
+    phone: false,
+    email: false,
+    country: false,
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    dispatch({ type: `SET_${name.toUpperCase()}`, payload: value });
+  };
+
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    setTouched({ ...touched, [name]: true });
+    if (value.trim() === '') {
+      errors[name] = 'This field is required.';
+    } else {
+      errors[name] = '';
+    }
+  };
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -20,89 +42,77 @@ export const ContactDetails = ({
           title="Contact Details"
           description="Welcome to United Properties, we are glad to see you! Let’s get started by letting us know a little bit about you"
         />
-        <div className="form">
-          <div className="row">
-            <Input
-              label="Fullname"
-              class="form-control__fullname"
+        <div className="row">
+          <label className="form-control__fullname">
+            Fullname
+            <input
               type="text"
-              id="fullName"
-              value={state.fullName.val}
-              isValid={state.fullName.isValid}
-              onChange={onChange('fullName')}
-              onBlur={onBlur('fullName')}
+              name="fullName"
+              value={state.fullName}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
-            <Input
-              type="tel"
-              pattern={'^(?:(d{3})|d{3})[- ]?d{3}[- ]?d{4}$'}
-              maxLength={15}
-              class="form-control__phone"
-              id="phone"
-              value={state.phone.val}
-              isValid={state.phone.isValid}
-              onChange={onChange('phone')}
-              onBlur={onBlur('phone')}
-            >
-              <select
-                onChange={onChange('phone')}
-                // value={state.phone.val}
-                name="phone"
-                id="phone"
-              >
-                {countries.map((country) => {
-                  return (
-                    <option key={country.dialCode} value={country.dialCode}>
-                      {country.flag}
-                    </option>
-                  );
-                })}
-              </select>
-            </Input>
-          </div>
-          {state.fullName.isValid === false && (
-            <p id="invalid__message">
-              Please insert your firstname and lastname separated by a space.
-            </p>
-          )}
-          {state.phone.isValid === false && (
-            <p id="invalid__message">Please insert a valid phone number.</p>
-          )}
-          <Input
-            label="Email"
-            type="text"
-            id="email"
-            value={state.email.val}
-            isValid={state.email.isValid}
-            onChange={onChange('email')}
-            onBlur={onBlur('email')}
-          />
-          <div
-            className={`form-control ${
-              state.country.isValid === false ? 'invalid' : ''
-            }`}
-          >
-            <label htmlFor="country">Country</label>
-            <select
-              name="countries"
-              id="country"
-              value={state.country.val}
-              onChange={onChange('country')}
-              onBlur={onBlur('country')}
-            >
-              <option value="">--Please choose an option--</option>
-              <option value="Austria">Austria</option>
-              <option value="Belgium">Belgium</option>
-              <option value="France">France</option>
-              <option value="Germany">Germany</option>
-              <option value="Italy">Italy</option>
-              <option value="Poland">Poland</option>
-              <option value="Spain">Spain</option>
-              <option value="Ukraine">Ukraine</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Switzerland">Switzerland</option>
+          </label>
+          <label className="form-control__phone">
+            <select name="phone" id="phone">
+              {countries.map((country) => {
+                return (
+                  <option key={country.dialCode} value={country.dialCode}>
+                    {country.flag}
+                  </option>
+                );
+              })}
             </select>
-          </div>
+            <input
+              type="text"
+              name="phone"
+              value={state.phone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </label>
         </div>
+        {touched.fullName && errors.fullName && (
+          <div className="error__message">{errors.fullName}</div>
+        )}
+        {touched.phone && errors.phone && (
+          <div className="error__message">{errors.phone}</div>
+        )}
+        <label>
+          Email
+          <input
+            type="email"
+            name="email"
+            value={state.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.email && errors.email && (
+            <div className="error__message">{errors.email}</div>
+          )}
+        </label>
+        <label>
+          Country
+          <select
+            type="text"
+            name="country"
+            value={state.country}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          >
+            <option value=""></option>
+            {countries.map((country) => {
+              return (
+                <option key={country.name} value={country.name}>
+                  {country.name}
+                </option>
+              );
+            })}
+          </select>
+          {touched.country && errors.country && (
+            <div className="error__message">{errors.country}</div>
+          )}
+        </label>
         <TitleDescription
           title="Privacy Policy"
           description="We know you care about how your personal information is used and shared, so we take your privacy seriously"
@@ -110,8 +120,13 @@ export const ContactDetails = ({
         >
           <a href="#">Expand privacy policy &rarr;</a>
         </TitleDescription>
+        {Object.values(errors).some((error) => error !== '') && (
+          <div className="error__message">
+            Please fill the form before going to next step.
+          </div>
+        )}
       </div>
-      <PageFooter step={step} nextStep={nextStep} />
+      <PageFooter step={step} onNext={onNext} />
     </React.Fragment>
   );
 };

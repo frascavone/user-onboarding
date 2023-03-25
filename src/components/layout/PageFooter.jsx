@@ -1,13 +1,12 @@
 import React from 'react';
 
-export const PageFooter = (props) => {
-  const currentStep = props.step;
+export const PageFooter = ({ step, onNext, onBack }) => {
   return (
     <React.Fragment>
       <footer className="page-footer">
-        {currentStep === 1 && <a href="#">&larr; Back to the homepage</a>}
-        {currentStep > 1 && (
-          <a href="#" onClick={props.previousStep}>
+        {step === 1 && <a href="#">&larr; Back to the homepage</a>}
+        {step > 1 && (
+          <a href="#" onClick={onBack}>
             &larr; Back to the previous step
           </a>
         )}
@@ -15,12 +14,12 @@ export const PageFooter = (props) => {
           <a href="#" className="skip">
             Skip for now
           </a>
-          {currentStep >= 1 && currentStep < 3 && (
-            <button type="button" className="next" onClick={props.nextStep}>
+          {step >= 1 && step < 3 && (
+            <button type="button" className="next" onClick={onNext}>
               Next step &rarr;
             </button>
           )}
-          {currentStep === 3 && (
+          {step === 3 && (
             <button type="submit" className="next">
               Finish
             </button>

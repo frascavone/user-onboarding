@@ -5,10 +5,16 @@ import { TitleDescription } from '../TitleDescription';
 
 export const InvestmentPreferences = ({
   step,
-  onChange,
-  previousStep,
-  estates,
+  state,
+  dispatch,
+  onBack,
+  onSubmit,
 }) => {
+  const handleChange = (event) => {
+    const { id } = event.target;
+    dispatch({ type: 'SET_ESTATEOPTIONS', payload: id });
+  };
+
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -19,20 +25,20 @@ export const InvestmentPreferences = ({
         />
         <h3>What kind of real estate are you intrested in?</h3>
         <div className="choice__cards">
-          {estates.map((item, index) => (
-            <div key={index} className="card">
-              <input
-                type="checkbox"
-                id={item.type}
-                value={item.type}
-                onInput={onChange('realEstates')}
-              />
-              <label htmlFor={item.type}>{item.type}</label>
+          {Object.keys(state.estateOptions).map((option) => (
+            <div key={option} className="card">
+              <input type="checkbox" id={option} onInput={handleChange} />
+              <label htmlFor={option} id={option} onClick={handleChange}>
+                {option
+                  .replace(/([A-Z])/g, ' $1')
+                  .charAt(0)
+                  .toUpperCase() + option.replace(/([A-Z])/g, ' $1').slice(1)}
+              </label>
             </div>
           ))}
         </div>
       </div>
-      <PageFooter step={step} previousStep={previousStep} />
+      <PageFooter step={step} onBack={onBack} onSubmit={onSubmit} />
     </React.Fragment>
   );
 };
