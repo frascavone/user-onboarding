@@ -2,7 +2,7 @@ export const Input = (props) => {
   return (
     <div
       className={`form-control ${props.class} ${
-        props.isValid === false ? 'invalid' : ''
+        props.isValid == false ? 'invalid' : ''
       }`}
     >
       {props.children}

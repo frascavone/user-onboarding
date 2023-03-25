@@ -2,9 +2,9 @@ import './App.scss';
 import { LeftBlock } from './components/layout/LeftBlock';
 import { ContactDetails } from './components/pages/ContactDetails';
 import { InvestmentPlans } from './components/pages/InvestmentPlans';
-import { useReducer, useState } from 'react';
 import { InvestmentPreferences } from './components/pages/InvestmentPreferences';
-import { stateReducer } from './reducer';
+import { useReducer, useState } from 'react';
+import { stateReducer } from './stateReducer';
 
 function App() {
   const steps = [
@@ -31,6 +31,10 @@ function App() {
 
   const incrementStep = () => {
     setCurrentStep((prevState) => {
+      if (state.country.currency === '') {
+        dispatch({ type: 'USER_INPUT', input: 'country', value: '' });
+        return steps[0];
+      }
       const stepIndex = prevState.stepNum - 1;
       return steps[stepIndex + 1];
     });
@@ -100,11 +104,7 @@ function App() {
   });
 
   const changeHandler = (inputName) => (e) => {
-    if (
-      (e.target.value !== '' || e.target.value === Boolean) &&
-      e.target.value !== undefined
-    )
-      dispatch({ type: 'USER_INPUT', input: inputName, value: e.target.value });
+    dispatch({ type: 'USER_INPUT', input: inputName, value: e.target.value });
   };
 
   const validateInput = (inputName) => (e) => {
@@ -116,8 +116,6 @@ function App() {
     e.preventDefault();
     console.log(`submitted this: `, state);
   };
-
-  console.log(state.range.from, state.range.to);
 
   return (
     <div className="App">

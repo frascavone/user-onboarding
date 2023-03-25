@@ -1,8 +1,33 @@
 import * as helpers from './validators.js';
+import {
+  PhoneNumberUtil,
+  PhoneNumberFormat as PNF,
+} from 'google-libphonenumber';
+const phoneUtil = PhoneNumberUtil.getInstance();
 
 export const stateReducer = (prevState, action) => {
   if (action.type === 'USER_INPUT') {
     switch (action.input) {
+      case 'country': {
+        if (action.value !== '') {
+          return {
+            ...prevState,
+            country: {
+              currency: 'EUR',
+              val: action.value,
+              isValid: true,
+            },
+          };
+        } else
+          return {
+            ...prevState,
+            country: {
+              currency: '',
+              val: action.value,
+              isValid: false,
+            },
+          };
+      }
       case 'from': {
         return {
           ...prevState,
@@ -87,28 +112,63 @@ export const stateReducer = (prevState, action) => {
     }
   }
   if (action.type === 'VALIDATION') {
-    const checkInputValidity = (checkFunction) => {
-      return {
-        ...prevState,
-        [action.input]: {
-          ...prevState[action.input],
-          isValid: checkFunction,
-        },
-      };
-    };
     switch (action.input) {
-      case 'fullName': {
-        checkInputValidity(helpers.validateName(action.value));
-      }
+      case 'fullName':
+        return {
+          ...prevState,
+          [action.input]: {
+            ...prevState[action.input],
+            isValid: helpers.validateName(action.value),
+          },
+        };
       case 'phone': {
-        checkInputValidity(helpers.validatePhone(action.value));
+        if (helpers.validatePhone(action.value)) {
+          const tel = phoneUtil.parse(action.value);
+          const formattedPhone = phoneUtil.format(tel, PNF.INTERNATIONAL);
+          return {
+            ...prevState,
+            phone: {
+              val: formattedPhone,
+              isValid: true,
+            },
+          };
+        } else
+          return {
+            ...prevState,
+            phone: {
+              val: action.value,
+              isValid: false,
+            },
+          };
       }
       case 'email': {
-        checkInputValidity(helpers.validateEmail(action.value));
+        return {
+          ...prevState,
+          [action.input]: {
+            ...prevState[action.input],
+            isValid: helpers.validateEmail(action.value),
+          },
+        };
       }
       case 'country': {
-        checkInputValidity(helpers.validateCountry(action.value));
+        if (action.value !== '') {
+          return {
+            ...prevState,
+            country: {
+              val: action.value,
+              isValid: true,
+            },
+          };
+        } else
+          return {
+            ...prevState,
+            country: {
+              val: action.value,
+              isValid: false,
+            },
+          };
       }
+
       case 'from': {
         return {
           ...prevState,
@@ -151,7 +211,7 @@ export const stateReducer = (prevState, action) => {
       default: {
         return {
           ...prevState,
-          [inputName]: { ...prevState[inputName], isValid: false },
+          [action.input]: { ...prevState[action.input], isValid: false },
         };
       }
     }

@@ -146,6 +146,7 @@ label {
     }
   }
 }
+
 label {
   display: flex;
   flex-direction: column;
@@ -167,13 +168,18 @@ label {
     width: 50%;
     & select {
       display: flex;
+      width: 25%;
     }
-    & input {
-      width: 100%;
+    & label {
+      width: 72%;
     }
   }
   &__fullname {
     margin-right: 2rem;
+    width: 50%;
+    & label {
+      width: 100%;
+    }
     & input {
       text-transform: capitalize;
     }

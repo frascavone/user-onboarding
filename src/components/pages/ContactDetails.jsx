@@ -34,7 +34,7 @@ export const ContactDetails = ({
             />
             <Input
               type="tel"
-              pattern={'[0-9]{3} [0-9]{2} [0-9]{3} [0-9]{4}'}
+              pattern={'^(?:(d{3})|d{3})[- ]?d{3}[- ]?d{4}$'}
               maxLength={15}
               class="form-control__phone"
               id="phone"
@@ -45,7 +45,7 @@ export const ContactDetails = ({
             >
               <select
                 onChange={onChange('phone')}
-                value={state.phone.val}
+                // value={state.phone.val}
                 name="phone"
                 id="phone"
               >
