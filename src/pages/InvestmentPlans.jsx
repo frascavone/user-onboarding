@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Input } from '../Input';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
-import { Slider } from '../Slider';
-import { TitleDescription } from '../TitleDescription';
+import { Slider } from '../components/Slider';
+import { TitleDescription } from '../components/TitleDescription';
 
 export const InvestmentPlans = ({
   step,
@@ -15,8 +14,8 @@ export const InvestmentPlans = ({
   onNext,
 }) => {
   const [touched, setTouched] = useState({
-    min: false,
-    max: false,
+    from: false,
+    to: false,
   });
 
   const handleChange = (event) => {
@@ -37,8 +36,10 @@ export const InvestmentPlans = ({
 
     if (value.trim() === '') {
       errors[name] = 'This field is required.';
-    } else if (!/^\d+(\.\d{1,2})?$/.test(value)) {
+    } else if (!/^[1-9]\d{0,2}(?:,?\d{3})*(?:\.\d{2})?$/.test(value)) {
       errors[name] = 'Please enter a valid currency value.';
+    } else if (+value < +state.from || +value > +state.to) {
+      errors[name] = '"To" field must be greater than "From"';
     } else {
       errors[name] = '';
     }

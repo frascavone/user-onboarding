@@ -1,50 +1,45 @@
-import {
-  PhoneNumberUtil,
-  PhoneNumberFormat as PNF,
-} from 'google-libphonenumber';
-const phoneUtil = PhoneNumberUtil.getInstance();
+import { PhoneNumberUtil } from 'google-libphonenumber';
 
 export const validateName = (string) => {
-  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]\d/;
-  if (string.trim().includes(' ') && !specialChars.test(string)) {
-    // console.log('nome valido');
-    return true;
-  } else return false;
+  // const specialChars = /[`!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?~]\d/;
+  const regEx = /^[a-zA-Z]+ [a-zA-Z- ']+$/;
+  if (regEx.test(string) && string.trim().includes(' ')) {
+    return '';
+  } else
+    return 'Please insert your firstname and lastname separated by a space.';
 };
+
+// export const validatePhone = (string) => {
+//   if (/^\+[0-9]{12}$/.test(string)) return '';
+//   else return 'Invalid number';
+// };
+
 export const validatePhone = (string) => {
   try {
-    const tel = phoneUtil.parse(string);
-    if (phoneUtil.isValidNumber(tel)) {
-      console.log('telefono valido');
-      return true;
-    } else throw Error;
+    const phoneUtil = PhoneNumberUtil.getInstance();
+    const tel = phoneUtil.parseAndKeepRawInput(string, 'IT');
+    if (phoneUtil.isValidNumber(tel) && phoneUtil.isPossibleNumber(tel)) {
+      return '';
+    } else throw Error('Invalid number');
   } catch (error) {
-    console.log(error.message);
-    return false;
+    return `${error.message}`;
   }
 };
 export const validateEmail = (string) => {
   const validRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2}))$/;
   if (string.match(validRegex)) {
-    return true;
-  } else return false;
+    return '';
+  } else return 'Please insert a valid email';
 };
 export const validateCountry = (string) => {
-  if (string !== '') {
-    console.log('country valida');
-    return true;
-  } else return false;
+  if (string !== '') return '';
+  else return 'Please insert a value';
 };
-export const validateFrom = (string) => {
-  if (string) {
-    // console.log('valore from valido');
-    return true;
-  } else return false;
-};
-export const validateTo = (string) => {
-  if (string) {
-    // console.log('valore to valido');
-    return true;
-  } else return false;
+
+export default {
+  validateCountry,
+  validateEmail,
+  validateName,
+  validatePhone,
 };

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Input } from '../Input';
-
+import {
+  validateName,
+  validatePhone,
+  validateEmail,
+  validateCountry,
+} from '../validators';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
-import { TitleDescription } from '../TitleDescription';
+import { TitleDescription } from '../components/TitleDescription';
 
 export const ContactDetails = ({
   step,
@@ -28,12 +32,29 @@ export const ContactDetails = ({
   const handleBlur = (event) => {
     const { name, value } = event.target;
     setTouched({ ...touched, [name]: true });
-    if (value.trim() === '') {
-      errors[name] = 'This field is required.';
-    } else {
-      errors[name] = '';
+    if (value.trim() === '') errors[name] = 'This field is required';
+    else {
+      switch (name) {
+        case 'fullName':
+          errors[name] = validateName(value);
+          break;
+        case 'phone':
+          if (validatePhone(value) === '') {
+            errors[name] = '';
+            dispatch({ type: `FORMAT_PHONE`, payload: value });
+          }
+          errors[name] = validatePhone(value);
+          break;
+        case 'email':
+          errors[name] = validateEmail(value);
+          break;
+        case 'country':
+          errors[name] = validateCountry(value);
+          break;
+      }
     }
   };
+
   return (
     <React.Fragment>
       <PageHeader step={step} />
@@ -54,7 +75,7 @@ export const ContactDetails = ({
             />
           </label>
           <label className="form-control__phone">
-            <select name="phone" id="phone">
+            <select name="phone" id="phone" onChange={handleChange}>
               {countries.map((country) => {
                 return (
                   <option key={country.dialCode} value={country.dialCode}>

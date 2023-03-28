@@ -1,6 +1,6 @@
 import React from 'react';
-import { ProgressStatus } from '../ProgressStatus';
-import { Quote } from '../Quote';
+import { ProgressStatus } from '../components/ProgressStatus';
+import { Quote } from '../components/Quote';
 
 export function LeftBlock({ step, quote }) {
   return (

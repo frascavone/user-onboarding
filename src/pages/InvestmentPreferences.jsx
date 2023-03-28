@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
-import { TitleDescription } from '../TitleDescription';
+import { TitleDescription } from '../components/TitleDescription';
 
 export const InvestmentPreferences = ({
   step,

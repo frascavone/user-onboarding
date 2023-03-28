@@ -10,7 +10,7 @@ export const Slider = ({ from, to, rangeSteps, currency, onChange }) => {
       const index = array.indexOf(value);
       percent = (100 / (array.length - 1)) * index;
       return percent;
-    }
+    } else percent = '';
     return percent;
   };
 

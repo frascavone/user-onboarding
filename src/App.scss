@@ -12,6 +12,27 @@
   display: flex;
   box-shadow: 0px 0px 56px rgba(0, 133, 255, 0.05);
   font-size: 1.5rem;
+  position: relative;
+  .step-changer {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 45%;
+    border-radius: 50%;
+    font-weight: 800;
+    background-color: #f6f7fb;
+    box-shadow: 0px 0px 56px rgba(0, 133, 255, 0.05);
+    color: #35a0ee;
+    font-size: 2rem;
+    &__prev {
+      left: -2%;
+    }
+    &__next {
+      right: -2%;
+    }
+  }
 }
 h2,
 h3 {
@@ -235,6 +256,7 @@ label {
   }
   .error__message {
     color: salmon;
+    margin: 0.5rem 0;
   }
 }
 .page-header {
@@ -252,7 +274,7 @@ label {
 .page-footer {
   width: 100%;
   height: 15%;
-  padding: 3rem 8rem;
+  padding: 1rem 8rem;
   font-size: 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -290,6 +312,9 @@ button {
 }
 .title-description {
   margin: 2rem 0;
+  p {
+    margin: 1rem 0;
+  }
 }
 
 // PAGE 1 /////////////////////////////////
