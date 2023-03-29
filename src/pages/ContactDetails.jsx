@@ -23,6 +23,7 @@ export const ContactDetails = ({
     email: false,
     country: false,
   });
+  const [thereIsUntouched, setThereIsUntouched] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,99 +56,111 @@ export const ContactDetails = ({
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (Object.values(errors).some((error) => error !== '')) {
+      return;
+    }
+    if (Object.values(touched).some((value) => value === false)) {
+      setThereIsUntouched(true);
+    } else onNext();
+  };
+
   return (
     <React.Fragment>
-      <PageHeader step={step} />
-      <div className="contact-details">
-        <TitleDescription
-          title="Contact Details"
-          description="Welcome to United Properties, we are glad to see you! Let’s get started by letting us know a little bit about you"
-        />
-        <div className="row">
-          <label className="form-control__fullname">
-            Fullname
+      <form onSubmit={handleSubmit}>
+        <PageHeader step={step} />
+        <div className="contact-details">
+          <TitleDescription
+            title="Contact Details"
+            description="Welcome to United Properties, we are glad to see you! Let’s get started by letting us know a little bit about you"
+          />
+          <div className="row">
+            <label className="form-control__fullname">
+              Fullname
+              <input
+                type="text"
+                name="fullName"
+                value={state.fullName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </label>
+            <label className="form-control__phone">
+              <select name="phone" id="phone" onChange={handleChange}>
+                {countries.map((country) => {
+                  return (
+                    <option key={country.dialCode} value={country.dialCode}>
+                      {country.flag}
+                    </option>
+                  );
+                })}
+              </select>
+              <input
+                type="text"
+                name="phone"
+                value={state.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </label>
+          </div>
+          {touched.fullName && errors.fullName && (
+            <div className="error__message">{errors.fullName}</div>
+          )}
+          {touched.phone && errors.phone && (
+            <div className="error__message">{errors.phone}</div>
+          )}
+          <label>
+            Email
             <input
-              type="text"
-              name="fullName"
-              value={state.fullName}
+              type="email"
+              name="email"
+              value={state.email}
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {touched.email && errors.email && (
+              <div className="error__message">{errors.email}</div>
+            )}
           </label>
-          <label className="form-control__phone">
-            <select name="phone" id="phone" onChange={handleChange}>
+          <label>
+            Country
+            <select
+              type="text"
+              name="country"
+              value={state.country}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            >
+              <option value=""></option>
               {countries.map((country) => {
                 return (
-                  <option key={country.dialCode} value={country.dialCode}>
-                    {country.flag}
+                  <option key={country.name} value={country.name}>
+                    {country.name}
                   </option>
                 );
               })}
             </select>
-            <input
-              type="text"
-              name="phone"
-              value={state.phone}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
+            {touched.country && errors.country && (
+              <div className="error__message">{errors.country}</div>
+            )}
           </label>
-        </div>
-        {touched.fullName && errors.fullName && (
-          <div className="error__message">{errors.fullName}</div>
-        )}
-        {touched.phone && errors.phone && (
-          <div className="error__message">{errors.phone}</div>
-        )}
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            value={state.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {touched.email && errors.email && (
-            <div className="error__message">{errors.email}</div>
-          )}
-        </label>
-        <label>
-          Country
-          <select
-            type="text"
-            name="country"
-            value={state.country}
-            onChange={handleChange}
-            onBlur={handleBlur}
+          <TitleDescription
+            title="Privacy Policy"
+            description="We know you care about how your personal information is used and shared, so we take your privacy seriously"
+            second
           >
-            <option value=""></option>
-            {countries.map((country) => {
-              return (
-                <option key={country.name} value={country.name}>
-                  {country.name}
-                </option>
-              );
-            })}
-          </select>
-          {touched.country && errors.country && (
-            <div className="error__message">{errors.country}</div>
+            <a href="#">Expand privacy policy &rarr;</a>
+          </TitleDescription>
+          {thereIsUntouched && (
+            <div className="error__message">
+              Please fill all the fields before proceeding to next step.
+            </div>
           )}
-        </label>
-        <TitleDescription
-          title="Privacy Policy"
-          description="We know you care about how your personal information is used and shared, so we take your privacy seriously"
-          second
-        >
-          <a href="#">Expand privacy policy &rarr;</a>
-        </TitleDescription>
-        {Object.values(errors).some((error) => error !== '') && (
-          <div className="error__message">
-            Please fill the form before going to next step.
-          </div>
-        )}
-      </div>
-      <PageFooter step={step} onNext={onNext} />
+        </div>
+        <PageFooter step={step} onNext={onNext} />
+      </form>
     </React.Fragment>
   );
 };

@@ -15,7 +15,7 @@ export const PageFooter = ({ step, onNext, onBack }) => {
             Skip for now
           </a>
           {step >= 1 && step < 3 && (
-            <button type="button" className="next" onClick={onNext}>
+            <button type="submit" className="next">
               Next step &rarr;
             </button>
           )}

@@ -17,28 +17,30 @@ export const InvestmentPreferences = ({
 
   return (
     <React.Fragment>
-      <PageHeader step={step} />
-      <div className="investment-preferences">
-        <TitleDescription
-          title="Investment preferences"
-          description="This will help us figure out what your investment options are so that we can show you only possibly intresting for you deals"
-        />
-        <h3>What kind of real estate are you intrested in?</h3>
-        <div className="choice__cards">
-          {Object.keys(state.estateOptions).map((option) => (
-            <div key={option} className="card">
-              <input type="checkbox" id={option} onInput={handleChange} />
-              <label htmlFor={option} id={option} onClick={handleChange}>
-                {option
-                  .replace(/([A-Z])/g, ' $1')
-                  .charAt(0)
-                  .toUpperCase() + option.replace(/([A-Z])/g, ' $1').slice(1)}
-              </label>
-            </div>
-          ))}
+      <form onSubmit={onSubmit}>
+        <PageHeader step={step} />
+        <div className="investment-preferences">
+          <TitleDescription
+            title="Investment preferences"
+            description="This will help us figure out what your investment options are so that we can show you only possibly intresting for you deals"
+          />
+          <h3>What kind of real estate are you intrested in?</h3>
+          <div className="choice__cards">
+            {Object.keys(state.estateOptions).map((option) => (
+              <div key={option} className="card">
+                <input type="checkbox" id={option} onInput={handleChange} />
+                <label htmlFor={option} id={option} onClick={handleChange}>
+                  {option
+                    .replace(/([A-Z])/g, ' $1')
+                    .charAt(0)
+                    .toUpperCase() + option.replace(/([A-Z])/g, ' $1').slice(1)}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <PageFooter step={step} onBack={onBack} onSubmit={onSubmit} />
+        <PageFooter step={step} onBack={onBack} onSubmit={onSubmit} />
+      </form>
     </React.Fragment>
   );
 };
