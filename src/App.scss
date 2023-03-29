@@ -97,11 +97,11 @@ label {
       }
       &__dash {
         border-left: 2.5px solid #dce8ff;
-        padding: 0.5rem 2.5rem;
+        padding: 0.4rem 2rem;
         margin: 0.5rem 0 0 1.6rem;
         &.active {
           border-left: 3px solid var(--main-bg-color);
-          padding: 0.5rem 2.5rem;
+          padding: 0.4rem 2rem;
           margin: 0.5rem 0 0 1.6rem;
         }
       }
@@ -224,6 +224,7 @@ label {
     input[type='email'],
     select {
       border: 1px solid gray;
+      background-color: transparent;
       padding: 0.5rem;
       font-size: 1.5rem;
       font-weight: 700;

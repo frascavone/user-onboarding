@@ -1,16 +1,16 @@
 export const countries = [
-  { name: 'Austria', currency: 'EUR', dialCode: '+43', flag: 'AT' },
-  { name: 'Belgium', currency: 'EUR', dialCode: '+32', flag: 'BE' },
-  { name: 'France', currency: 'EUR', dialCode: '+33', flag: 'FR' },
-  { name: 'Germany', currency: 'EUR', dialCode: '+49', flag: 'DE' },
-  { name: 'Italy', currency: 'EUR', dialCode: '+39', flag: 'IT' },
-  { name: 'Japan', currency: 'JPN', dialCode: '+81', flag: 'JP' },
-  { name: 'Poland', currency: 'EUR', dialCode: '+48', flag: 'PL' },
-  { name: 'Spain', currency: 'EUR', dialCode: '+34', flag: 'ES' },
-  { name: 'Switzerland', currency: 'CHF', dialCode: '+41', flag: 'CH' },
-  { name: 'Uk', currency: 'EUR', dialCode: '+44', flag: 'UK' },
-  { name: 'Ukraine', currency: 'EUR', dialCode: '+380', flag: 'UA' },
-  { name: 'United States', currency: 'USD', dialCode: '+1', flag: 'US' },
+  { name: 'Austria', currency: 'EUR', dialCode: '+43', flag: '🇦🇹️' },
+  { name: 'Belgium', currency: 'EUR', dialCode: '+32', flag: '🇧🇪️' },
+  { name: 'France', currency: 'EUR', dialCode: '+33', flag: '🇨🇵️' },
+  { name: 'Germany', currency: 'EUR', dialCode: '+49', flag: '🇩🇪️' },
+  { name: 'Italy', currency: 'EUR', dialCode: '+39', flag: '🇮🇹️' },
+  { name: 'Japan', currency: 'JPN', dialCode: '+81', flag: '🇯🇵️' },
+  { name: 'Poland', currency: 'EUR', dialCode: '+48', flag: '🇵🇱️' },
+  { name: 'Spain', currency: 'EUR', dialCode: '+34', flag: '🇪🇸️' },
+  { name: 'Switzerland', currency: 'CHF', dialCode: '+41', flag: '🇨🇭️' },
+  { name: 'Uk', currency: 'EUR', dialCode: '+44', flag: '🇬🇧️' },
+  { name: 'Ukraine', currency: 'EUR', dialCode: '+380', flag: '🇺🇦️' },
+  { name: 'United States', currency: 'USD', dialCode: '+1', flag: '🇺🇸️' },
 ];
 
 export const errors = {

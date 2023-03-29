@@ -34,7 +34,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Final state:', state);
+    localStorage.setItem('FINAL', JSON.stringify(state));
   };
 
   return (
