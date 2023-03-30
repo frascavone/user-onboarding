@@ -96,7 +96,7 @@ label {
         top: 0.5rem;
       }
       &__square {
-        border: 2.5px solid #dce8ff;
+        border: 2px solid #dce8ff;
         width: 2.5rem;
         height: 2.5rem;
         border-radius: 2px;
@@ -119,9 +119,10 @@ label {
 
       &__dot {
         display: none;
-        height: 0.9rem;
+        width: 100%;
+        height: 100%;
         background-color: var(--secondary-color);
-        border-radius: 2px;
+        border-radius: 1px;
         &.active {
           display: block;
         }
@@ -327,8 +328,7 @@ button {
 
 // PAGE 1 /////////////////////////////////
 .contact-details {
-  width: 90%;
-  padding: 3rem 8rem;
+  padding: 3rem 15rem 3rem 8rem;
   .form {
     display: flex;
     flex-direction: column;
@@ -536,6 +536,7 @@ button {
   .user-onboarding {
     flex-direction: column;
   }
+
   .left-block {
     width: 100%;
     flex-direction: row;
@@ -568,7 +569,7 @@ button {
       }
     }
   }
-  .page-content {
+  form {
     width: 100%;
   }
 }
@@ -576,17 +577,16 @@ button {
   html {
     font-size: 37.5%;
   }
+
   .contact-details {
-    width: 100%;
-    padding: 3rem 5rem;
+    padding: 3rem 8rem;
   }
   .investment-plans {
-    width: 100%;
     padding: 3rem 5rem;
   }
   .investment-preferences {
     width: 80%;
-    padding: 3rem 5rem;
+    padding: 0 5rem;
   }
 }
 @media (max-width: 24.62rem) {
@@ -600,15 +600,9 @@ button {
   }
   .row {
     flex-direction: column;
-    .form-control {
+    label {
       width: 100%;
       margin: 1rem 0;
-      &__phone {
-        margin-top: 2rem;
-        label {
-          width: 100%;
-        }
-      }
     }
   }
 }
