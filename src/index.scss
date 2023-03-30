@@ -17,7 +17,26 @@ body {
   background-color: #dce8ff;
   padding: 2rem 3rem;
 }
-.App {
+.homepage {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem auto;
+  button {
+    font-size: 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin: 2rem;
+    &:hover {
+      background-color: blue;
+    }
+  }
+}
+.nopage {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem auto;
+}
+.user-onboarding {
   border-radius: 8px;
   max-width: 144rem;
   margin: auto;
@@ -514,7 +533,7 @@ button {
   }
 }
 @media (max-width: 46.68rem) {
-  .App {
+  .user-onboarding {
     flex-direction: column;
   }
   .left-block {

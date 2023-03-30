@@ -131,7 +131,7 @@ export const InvestmentPlans = ({
             </div>
           )}
         </div>
-        <PageFooter step={step} onNext={onNext} onBack={onBack} />
+        <PageFooter step={step} onSubmit={handleSubmit} onBack={onBack} />
       </form>
     </React.Fragment>
   );

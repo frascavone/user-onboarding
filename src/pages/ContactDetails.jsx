@@ -159,7 +159,7 @@ export const ContactDetails = ({
             </div>
           )}
         </div>
-        <PageFooter step={step} onNext={onNext} />
+        <PageFooter step={step} onSubmit={handleSubmit} />
       </form>
     </React.Fragment>
   );
