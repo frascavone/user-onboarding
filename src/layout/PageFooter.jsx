@@ -21,21 +21,14 @@ export const PageFooter = ({ step, onBack, onSubmit }) => {
             Skip for now
           </a>
           {step === 1 && (
-            <Link onClick={onSubmit} to="/user-onboarding-investment-plans">
-              <button type="submit" className="next">
-                Next step &rarr;
-              </button>
-            </Link>
+            <button type="submit" onClick={onSubmit} className="next">
+              Next step &rarr;
+            </button>
           )}
           {step === 2 && (
-            <Link
-              onClick={onSubmit}
-              to="/user-onboarding-investment-preferences"
-            >
-              <button type="submit" className="next">
-                Next step &rarr;
-              </button>
-            </Link>
+            <button type="submit" onClick={onSubmit} className="next">
+              Next step &rarr;
+            </button>
           )}
           {step === 3 && (
             <button onClick={onSubmit} type="submit" className="next">

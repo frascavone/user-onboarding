@@ -8,6 +8,7 @@ import {
 import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { TitleDescription } from '../components/TitleDescription';
+import { useNavigate } from 'react-router-dom';
 
 export const ContactDetails = ({
   step,
@@ -56,14 +57,18 @@ export const ContactDetails = ({
     }
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (Object.values(errors).some((error) => error !== '')) {
       return;
     }
     if (Object.values(touched).some((value) => value === false)) {
       setThereIsUntouched(true);
-    } else onNext();
+    } else navigate('/user-onboarding-investment-plans', { replace: true });
+    onNext();
   };
 
   return (

@@ -13,15 +13,21 @@ import UserOnboarding from './layout/UserOnboarding';
 import Home from './pages/Home';
 
 export default function App() {
+  // temporary state is stored in localStorage
   const storedState = JSON.parse(localStorage.getItem('TEMPORARY'));
 
   const [step, setStep] = useState(1);
   const [quote, setQuote] = useState(quotes[0]);
+
+  // if no state is found in localStorage, empty state is provided by initialState
   const [state, dispatch] = useReducer(
     reducer,
     storedState ? storedState : initialState
   );
 
+  /* state is updated on every user input and validated on blur.
+    If some input field is untouched or invalid the user cannot proceed to next page.  
+  */
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
     setQuote((prevQuote) => {
@@ -40,16 +46,19 @@ export default function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     localStorage.setItem('FINAL', JSON.stringify(state));
+    console.log(state);
   };
 
   return (
+    // The routes are structured as if the three steps form was just a part of another site.
+
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />}></Route>
-        <Route
-          // path="user-onboarding"
-          element={<UserOnboarding step={step} quote={quote} />}
-        >
+        {/* I choose "user-onboarding-<page-name>" to avoid user 
+          ends up on "user-onboarding/" route, which is 
+          just LeftBlock component and white space */}
+        <Route element={<UserOnboarding step={step} quote={quote} />}>
           <Route
             index
             path="user-onboarding-contact-details"

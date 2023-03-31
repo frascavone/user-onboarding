@@ -57,7 +57,9 @@ export const InvestmentPlans = ({
     }
     if (Object.values(touched).some((value) => value === false)) {
       setThereIsUntouched(true);
-    } else onNext();
+    } else
+      navigate('/user-onboarding-investment-preferences', { replace: true });
+    onNext();
   };
 
   return (
