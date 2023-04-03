@@ -3,6 +3,7 @@ import { PageFooter } from '../layout/PageFooter';
 import { PageHeader } from '../layout/PageHeader';
 import { Slider } from '../components/Slider';
 import { TitleDescription } from '../components/TitleDescription';
+import { useNavigate } from 'react-router-dom';
 
 export const InvestmentPlans = ({
   step,
@@ -49,6 +50,7 @@ export const InvestmentPlans = ({
       errors[name] = '';
     }
   };
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,9 +59,10 @@ export const InvestmentPlans = ({
     }
     if (Object.values(touched).some((value) => value === false)) {
       setThereIsUntouched(true);
-    } else
+    } else {
       navigate('/user-onboarding-investment-preferences', { replace: true });
-    onNext();
+      onNext();
+    }
   };
 
   return (
@@ -68,7 +71,7 @@ export const InvestmentPlans = ({
         <PageHeader step={step} />
         <div className="investment-plans">
           <TitleDescription
-            title="Investment plans"
+            title="Investment Plans"
             description="Let us know about your investment plans. This will help us get you to the right expert who will help you further"
           />
           <h3>Ho much are you planning to invest in this year?</h3>

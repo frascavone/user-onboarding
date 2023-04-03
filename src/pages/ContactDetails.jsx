@@ -67,8 +67,10 @@ export const ContactDetails = ({
     }
     if (Object.values(touched).some((value) => value === false)) {
       setThereIsUntouched(true);
-    } else navigate('/user-onboarding-investment-plans', { replace: true });
-    onNext();
+    } else {
+      navigate('/user-onboarding-investment-plans', { replace: true });
+      onNext();
+    }
   };
 
   return (
