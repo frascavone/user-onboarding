@@ -16,6 +16,10 @@ export const Slider = ({ from, to, rangeSteps, currency, onChange }) => {
 
   return (
     <React.Fragment>
+      <div className="row">
+        <p>From</p>
+        <p>To</p>
+      </div>
       <div className="slider">
         <datalist className="slider__bar">
           {rangeSteps.map((step) => {
@@ -49,6 +53,7 @@ export const Slider = ({ from, to, rangeSteps, currency, onChange }) => {
             <option
               key={step + 1}
               value={step}
+              name="range"
               className={`notch__label ${
                 step >= FROM && step <= TO ? 'active' : ''
               }`}

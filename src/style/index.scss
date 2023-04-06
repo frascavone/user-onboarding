@@ -268,7 +268,7 @@ label {
   margin: 0.5rem 0;
 }
 
-.page-header {
+.step-header {
   width: 100%;
   justify-content: space-between;
   height: 10%;
@@ -280,7 +280,7 @@ label {
     font-weight: 800;
   }
 }
-.page-footer {
+.step-footer {
   width: 100%;
   height: 15%;
   padding: 1rem 8rem;
@@ -326,7 +326,7 @@ button {
   }
 }
 
-// PAGE 1 /////////////////////////////////
+// STEP 1 /////////////////////////////////
 .contact-details {
   padding: 3rem 15rem 3rem 8rem;
   .form {
@@ -341,7 +341,7 @@ button {
   }
 }
 
-// PAGE 2 /////////////////////////////////
+// STEP 2 /////////////////////////////////
 .investment-plans {
   height: 75%;
   display: flex;
@@ -352,7 +352,7 @@ button {
   .row {
     width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     margin-bottom: 2rem;
     & #from {
       margin-right: 2rem;
@@ -471,7 +471,7 @@ button {
   }
 }
 
-// PAGE 3 /////////////////////////////////
+// STEP 3 /////////////////////////////////
 .investment-preferences {
   height: 75%;
   max-width: 80%;

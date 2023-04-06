@@ -16,7 +16,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "e2e": "cypress open"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -28,6 +29,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "cypress": "^12.9.0",
     "google-libphonenumber": "^3.2.32",
     "react-router-dom": "^6.9.0",
     "react-test-renderer": "^18.2.0",

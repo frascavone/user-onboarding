@@ -14,12 +14,29 @@ export const countries = [
 ];
 
 export const errors = {
-  fullName: '',
-  phone: '',
-  email: '',
-  country: '',
-  from: '',
-  to: '',
+  step1: {
+    fullName: '',
+    phone: '',
+    email: '',
+    country: '',
+  },
+  step2: {
+    from: '',
+    to: '',
+  },
+};
+
+export const touched = {
+  step1: {
+    fullName: false,
+    phone: false,
+    email: false,
+    country: false,
+  },
+  step2: {
+    range: false,
+    isInvestor: false,
+  },
 };
 
 export const initialState = {
