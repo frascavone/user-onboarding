@@ -1,9 +1,7 @@
- Create an onboarding process using the attached mockup file.
+An onboarding process built with React.
 ===============================
 
 ![preview](https://github.com/tomorrowdevs-projects/user-onboarding/blob/main/preview.png "preview")
-
-## Download here the [Figma Mockup](https://github.com/tomorrowdevs-projects/user-onboarding/blob/main/User_onboarding.fig)
 
 Requirements:
 ----------------
