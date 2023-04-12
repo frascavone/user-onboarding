@@ -48,40 +48,41 @@ export const Step = () => {
     });
   };
 
+  console.log(touched.step1);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const thereIsErrorsOrUntouched = (number) => {
-      if (
-        Object.values(errors[`step${number}`]).some((error) => error !== '')
-      ) {
-        return;
-      }
-      if (
+      if (Object.values(errors[`step${number}`]).some((error) => error !== ''))
+        return false;
+      else if (
         Object.values(touched[`step${number}`]).some((value) => value === false)
       ) {
         setThereIsUntouched(true);
-      } else return false;
+        return false;
+      } else return true;
     };
     switch (step) {
       case 1:
-        if (!thereIsErrorsOrUntouched(1)) {
+        console.log(thereIsErrorsOrUntouched(1));
+        if (thereIsErrorsOrUntouched(1)) {
           navigate('/user-onboarding-investment-plans', {
             replace: true,
           });
           handleNext();
-        }
+        } else return;
         break;
       case 2:
-        if (!thereIsErrorsOrUntouched(2)) {
+        if (thereIsErrorsOrUntouched(2)) {
           navigate('/user-onboarding-investment-preferences', {
             replace: true,
           });
           handleNext();
-        }
+        } else return;
         break;
       case 3:
+        console.log(`FINAL SUBMIT: ` + state);
         localStorage.setItem('FINAL', JSON.stringify(state));
         break;
       default:
@@ -122,7 +123,7 @@ export const Step = () => {
               handleNext,
             }}
           />
-          <StepFooter step={step} />
+          <StepFooter step={step} onBack={handleBack} />
         </form>
       </div>
     </React.Fragment>
