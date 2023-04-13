@@ -3,7 +3,7 @@ import {
   validatePhone,
   validateEmail,
   validateCountry,
-} from '../validators';
+} from '../../src/js/validators';
 
 // IF EMPTY STRING IS RETURNED, THE VALUE IS VALID
 
