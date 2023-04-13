@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: test-build-run
 on: [push]
 jobs:
   check-bats-version:
@@ -10,3 +10,6 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+      - run: npm run test
+      - run: npm run build
+      - run: npm run deploy
