@@ -1,7 +1,5 @@
 # An onboarding process built with React.
 
-### prova github actions
-
 ![preview](https://github.com/tomorrowdevs-projects/user-onboarding/blob/main/preview.png 'preview')
 
 ## Requirements:
