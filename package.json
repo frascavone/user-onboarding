@@ -33,7 +33,6 @@
     "@vitejs/plugin-react": "^3.1.0",
     "cypress": "^12.9.0",
     "google-libphonenumber": "^3.2.32",
-    "netlify-cli": "^13.2.2",
     "react-router-dom": "^6.9.0",
     "react-test-renderer": "^18.2.0",
     "vite": "^4.1.0"
