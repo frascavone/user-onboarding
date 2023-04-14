@@ -3,7 +3,7 @@ name: Node CI
 on: [push]
 
 jobs: 
-  test_changes:
+  test_and_build:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3
