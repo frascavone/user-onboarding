@@ -1,20 +1,15 @@
-name: Node CI 
+name: Node CI
 
 on: [push]
 
-jobs: 
+jobs:
   test_and_build:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1      
+      - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - run: npm ci
+      - run: npm ci --no-optional
       - run: npm run test
       - run: npm run build
-      
-      
-      
-      
-      
