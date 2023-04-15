@@ -4,7 +4,7 @@ describe('user-journey', () => {
   it('checks link to homepage', () => {
     cy.visit('/user-onboarding-contact-details');
     cy.get('a[data-cy=backToHome]').click();
-    cy.url().should('equal', 'http://localhost:5173/');
+    cy.url().should('equal', Cypress.config().baseUrl);
   });
 
   it('checks UX', () => {

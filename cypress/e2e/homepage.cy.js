@@ -2,7 +2,7 @@
 
 describe('user-onboarding', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/');
+    cy.visit(Cypress.config().baseUrl);
   });
 
   it('homepage links to user-onboarding', () => {
