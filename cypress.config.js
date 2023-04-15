@@ -7,7 +7,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: 'https://user-onboarding-frascavone.netlify.app/',
+    baseUrl: 'http://localhost:5173/',
   },
 
   component: {
