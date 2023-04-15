@@ -1,14 +1,18 @@
 /// <reference types="cypress" />
 
 describe('user-journey', () => {
+  beforeEach(() => {
+    cy.visit(Cypress.config().baseUrl);
+    cy.get('a').click();
+  });
   it('checks link to homepage', () => {
-    cy.visit('/user-onboarding-contact-details');
+    // cy.visit('/user-onboarding-contact-details');
     cy.get('a[data-cy=backToHome]').click();
     cy.url().should('equal', Cypress.config().baseUrl);
   });
 
   it('checks UX', () => {
-    cy.visit('/user-onboarding-contact-details');
+    // cy.visit('/user-onboarding-contact-details');
 
     cy.get('input[name=fullName]').type('Mario Rossi').blur();
     cy.get('[data-cy="error-fullName"]').should('not.exist');

@@ -2,7 +2,8 @@
 
 describe('contact-details', () => {
   it('validates input fields', () => {
-    cy.visit(`${Cypress.config().baseUrl}/user-onboarding-contact-details`);
+    cy.visit(Cypress.config().baseUrl);
+    cy.get('a').click();
 
     // Fullname tests
     cy.get('input[name=fullName]').type('noasinajnc').blur();
